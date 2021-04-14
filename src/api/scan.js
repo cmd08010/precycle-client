@@ -2,6 +2,7 @@ import apiUrl from '../apiConfig'
 import axios from 'axios'
 
 export const sendScan = (user, data) => {
+  console.log(data, "my api data")
   return axios({
     method: 'POST',
     url: apiUrl + '/scans/',
@@ -10,7 +11,9 @@ export const sendScan = (user, data) => {
       },
     data: {
       name: data,
-      
+      recycleable: false,
+      description: "test description",
+      barcode: "test barcode"
     }
   })
 }
