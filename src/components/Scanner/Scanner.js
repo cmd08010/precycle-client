@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
-import { sendScan, scanIndex } from '../../api/scan'
+import { scanIndex, sendScan } from '../../api/scan'
 
 import Form from 'react-bootstrap/Form'
 import FormFile from 'react-bootstrap/FormFile'
@@ -13,11 +13,11 @@ import Barcode from './Barcode'
 const Scanner = ({ user, msgAlert }) => {
   const [caption, setCaption] = useState('')
   const [text, setText] = useState('')
-  const [form, setForm] = useState('')
+  const [form, setForm] = useState(null)
   const [loading, setLoading] = useState(false)
   const [image, setImage] = useState(null)
   const [barcode, setBarcode] = useState(null)
-
+  const [data, setData] = useState('Not Found')
 
   useEffect(() => {
     scanIndex(user)
@@ -26,11 +26,6 @@ const Scanner = ({ user, msgAlert }) => {
 
   const handleTextChange = event => {
     setText(event.target.value)
-  }
-
-  const handleBarcodeChange = event => {
-    const str = event.target.value
-    setBarcode(str)
   }
 
   const handleImageSubmit = event => {
@@ -43,31 +38,22 @@ const Scanner = ({ user, msgAlert }) => {
       console.log(text, "text")
       data = text
     }
-    if(form === "barcode"){
-      data = barcode
+    if(form === "barcode") {
+      sendScan(user, data)
+        .then(res => console.log(res))
+        .then(() => msgAlert({
+            heading: 'Picture Successfully Uploaded',
+            message: 'Click to add more pictures to your account!',
+            variant: 'success'
+          }))
+        .catch(error => {
+          msgAlert({
+            heading: 'Failed to Upload Picture ',
+            message: 'Could not upload pictures with error' + error.message,
+            variant: 'danger'
+          })
+        })
     }
-
-    setLoading(true)
-    // setImagePreview(null)
-    sendScan(user, data)
-    .then(res => console.log(res))
-    // pictureCreate(user, data)
-    //   .then(response => {
-    //     setImageURL(response.data.picture.url)
-    //   })
-    //   .then(() => setLoading(false))
-    //   .then(() => msgAlert({
-    //     heading: 'Picture Successfully Uploaded',
-    //     message: 'Click to add more pictures to your account!',
-    //     variant: 'success'
-    //   }))
-    //   .catch(error => {
-    //     msgAlert({
-    //       heading: 'Failed to Upload Picture ',
-    //       message: 'Could not upload pictures with error' + error.message,
-    //       variant: 'danger'
-    //     })
-    //   })
   }
 
   const addImage = () => {}
@@ -82,6 +68,7 @@ const Scanner = ({ user, msgAlert }) => {
   const showImageForm = () => {
     setForm("image")
   }
+
 
   return (
     <div className="container">
@@ -133,9 +120,10 @@ const Scanner = ({ user, msgAlert }) => {
               onChange={handleTextChange}
             />
           </Form.Group>}
-          {form === "barcode" && <Form.Group controlId="caption">
-            <Form.Label>Barcode</Form.Label>
-            <Barcode />
+          { form === "barcode" &&
+          <Form.Group controlId="caption">
+          <Form.Label>Barcode</Form.Label>
+            <Barcode data={data} setData={setData} />
           </Form.Group>
         }
         { form && <Button
