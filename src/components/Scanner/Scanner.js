@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
-import { sendScan, scanIndex } from '../api/scan'
+import { sendScan, scanIndex } from '../../api/scan'
 
 import Form from 'react-bootstrap/Form'
 import FormFile from 'react-bootstrap/FormFile'
@@ -34,18 +34,19 @@ const Scanner = ({ user, msgAlert }) => {
 
   const handleImageSubmit = event => {
     event.preventDefault()
-    const data = new FormData()
+    let data = ""
     if(form === "image"){
-      data.append('image', image)
+      data = image
     }
     if(form === "text"){
-      data.append('text', text)
+      console.log(text, "text")
+      data = text
     }
     if(form === "barcode"){
-      data.append('barcode', barcode)
+      data = barcode
     }
-    //
-    // setLoading(true)
+
+    setLoading(true)
     // setImagePreview(null)
     sendScan(user, data)
     .then(res => console.log(res))
