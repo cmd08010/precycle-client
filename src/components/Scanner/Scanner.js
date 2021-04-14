@@ -8,6 +8,7 @@ import Button from 'react-bootstrap/Button'
 import Image from 'react-bootstrap/Image'
 import Spinner from 'react-bootstrap/Spinner'
 import { Col } from 'react-bootstrap'
+import Barcode from './Barcode'
 
 const Scanner = ({ user, msgAlert }) => {
   const [caption, setCaption] = useState('')
@@ -134,13 +135,7 @@ const Scanner = ({ user, msgAlert }) => {
           </Form.Group>}
           {form === "barcode" && <Form.Group controlId="caption">
             <Form.Label>Barcode</Form.Label>
-            <Form.Control
-              type="text"
-              name="tag"
-              value={barcode}
-              placeholder="Enter Tag"
-              onChange={handleBarcodeChange}
-            />
+            <Barcode />
           </Form.Group>
         }
         { form && <Button
