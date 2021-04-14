@@ -8,6 +8,7 @@ import Header from './components/Header/Header'
 import SignUp from './components/SignUp/SignUp'
 import SignIn from './components/SignIn/SignIn'
 import SignOut from './components/SignOut/SignOut'
+import Scanner from './components/Scanner'
 import ChangePassword from './components/ChangePassword/ChangePassword'
 
 class App extends Component {
@@ -64,6 +65,9 @@ class App extends Component {
           )} />
           <AuthenticatedRoute user={user} path='/change-password' render={() => (
             <ChangePassword msgAlert={this.msgAlert} user={user} />
+          )} />
+          <AuthenticatedRoute user={user} path='/home' render={() => (
+            <Scanner msgAlert={this.msgAlert} user={user} />
           )} />
         </main>
       </Fragment>
