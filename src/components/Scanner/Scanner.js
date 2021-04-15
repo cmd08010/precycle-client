@@ -102,14 +102,6 @@ const Scanner = ({ user, msgAlert }) => {
         >
         Image
         </Button>
-        <Button
-          variant="link"
-          type="button"
-          className="bubble"
-          onClick={showBarcodeForm}
-        >
-        ADMIN
-        </Button>
         <Form onSubmit={handleImageSubmit}>
           {form === "image" &&<Form.Group controlId="image">
             <FormFile

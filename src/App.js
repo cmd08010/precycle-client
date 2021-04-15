@@ -75,7 +75,7 @@ class App extends Component {
           <AuthenticatedRoute user={user} path='/barcode' render={() => (
             <Barcode msgAlert={this.msgAlert} user={user} />
           )} />
-           <SuperUserRoute user={user} path='/add-item' render={() => (
+           <AuthenticatedRoute user={user} path='/add-item' render={() => (
             <AddItem msgAlert={this.msgAlert} user={user} />
           )} />
         </main>

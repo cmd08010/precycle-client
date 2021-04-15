@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
-import { scanIndex, sendScan } from '../../api/scan'
+import { scanIndex, addItem } from '../../api/scan'
 
 import Form from 'react-bootstrap/Form'
 import FormFile from 'react-bootstrap/FormFile'
@@ -11,36 +11,33 @@ import { Col } from 'react-bootstrap'
 import Barcode from './Barcode'
 
 const AddItem = ({ user, msgAlert }) => {
-  const [caption, setCaption] = useState('')
-  const [text, setText] = useState('')
-  const [form, setForm] = useState(null)
-  const [loading, setLoading] = useState(false)
-  const [image, setImage] = useState(null)
-  const [barcode, setBarcode] = useState(null)
+  const [name, setName] = useState('')
+  const [recycleable, setRecycleable] = useState('')
+  const [description, setDescription] = useState('')
+  const [barcode, setBarcode] = useState('')
   const [data, setData] = useState('Not Found')
 
-  useEffect(() => {
-    scanIndex(user)
-    .then(res => console.log(res))
-  }, [])
-
-  const handleTextChange = event => {
-    setText(event.target.value)
+  const handleRecycleableChange = event => {
+    setRecycleable(!recycleable)
+  }
+  const handleNameChange = event => {
+    setName(event.target.value)
+  }
+  const handleDescriptionChange = event => {
+    setDescription(event.target.value)
+  }
+  const handleBarcodeChange = event => {
+    setBarcode(event.target.value)
   }
 
-  const handleImageSubmit = event => {
+  const addNewItem = event => {
     event.preventDefault()
-    let dataInfo = {}
-    if(form === "image"){
-      dataInfo.image = image
-    }
-    if(form === "text"){
-      console.log(text, "text")
-      dataInfo.text = text
-    }
-    if(form === "barcode") {
-      dataInfo.barcode = data
-      sendScan(user, data)
+    const data = new FormData()
+    data.append('name', name)
+    data.append('recycleable', recycleable)
+    data.append('description', description)
+    data.append('barcode', barcode)
+      addItem(user, data)
         .then(res => console.log(res))
         .then(() => msgAlert({
             heading: 'Picture Successfully Uploaded',
@@ -55,21 +52,6 @@ const AddItem = ({ user, msgAlert }) => {
           })
         })
     }
-  }
-
-  const addImage = () => {}
-
-  const showBarcodeForm = () => {
-    setForm("barcode")
-
-  }
-  const showTextForm = () => {
-    setForm("text")
-  }
-  const showImageForm = () => {
-    setForm("image")
-  }
-
 
   return (
     <div className="container">
@@ -78,69 +60,51 @@ const AddItem = ({ user, msgAlert }) => {
       <div className="bubble">
         <h2>Check your product!</h2>
         </div>
-        <Button
-          variant="link"
-          type="button"
-          className="bubble"
-          onClick={showBarcodeForm}
-        >
-        Barcode
-        </Button>
-        <Button
-          variant="link"
-          type="button"
-          className="bubble"
-          onClick={showTextForm}
-        >
-        Text
-        </Button>
-        <Button
-          variant="link"
-          type="button"
-          className="bubble"
-          onClick={showImageForm}
-        >
-        Image
-        </Button>
-        <Button
-          variant="link"
-          type="button"
-          className="bubble"
-          onClick={showBarcodeForm}
-        >
-        ADMIN
-        </Button>
-        <Form onSubmit={handleImageSubmit}>
-          {form === "image" &&<Form.Group controlId="image">
-            <FormFile
-              required
-              id="upload-file-input"
-              label="Upload File Here"
-              onChange={addImage}
-            />
-          </Form.Group>}
-          {form === "text" && <Form.Group controlId="caption">
+        <Form onSubmit={addNewItem}>
+        <Form.Group controlId="name">
             <Form.Label>Text</Form.Label>
             <Form.Control
               type="text"
-              name="caption"
-              value={text}
-              placeholder="Enter Caption"
-              onChange={handleTextChange}
+              name="name"
+              value={name}
+              placeholder="Enter name"
+              onChange={handleNameChange}
             />
-          </Form.Group>}
-          { form === "barcode" &&
-          <Form.Group controlId="caption">
-          <Form.Label>Barcode</Form.Label>
-            <Barcode data={data} setData={setData} />
           </Form.Group>
-        }
-        { form && <Button
+          <Form.Group controlId="recycleable">
+              <Form.Label>recycleable</Form.Label>
+              <Form.Control
+                type="checkbox"
+                name="recycleable"
+                onChange={handleRecycleableChange}
+              />
+            </Form.Group>
+            <Form.Group controlId="description">
+                <Form.Label>Description</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="description"
+                  value={description}
+                  placeholder="Enter Description"
+                  onChange={handleDescriptionChange}
+                />
+              </Form.Group>
+              <Form.Group controlId="barcode">
+                  <Form.Label>Barcode</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="barcode"
+                    value={barcode}
+                    placeholder="Enter Barcode"
+                    onChange={handleBarcodeChange}
+                  />
+                </Form.Group>
+        <Button
           type="submit"
           className="bubble"
         >
         Submit
-        </Button>}
+        </Button>
         </Form>
       </div>
     </div>
