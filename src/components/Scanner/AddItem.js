@@ -11,39 +11,29 @@ import { Col } from 'react-bootstrap'
 import Barcode from './Barcode'
 
 const AddItem = ({ user, msgAlert }) => {
-  const [name, setName] = useState('')
-  const [recycleable, setRecycleable] = useState('')
-  const [description, setDescription] = useState('')
-  const [barcode, setBarcode] = useState('')
-  const [data, setData] = useState('Not Found')
+  const [item, setItem] = useState({
+    name: '',
+    description: '',
+    barcode: ''
+  })
+  const [recycleable, setRecycleable] = useState(false)
 
-  const handleRecycleableChange = event => {
-    setRecycleable(!recycleable)
-  }
-  const handleNameChange = event => {
-    setName(event.target.value)
-  }
-  const handleDescriptionChange = event => {
-    setDescription(event.target.value)
-  }
-  const handleBarcodeChange = event => {
-    setBarcode(event.target.value)
+  const handleRecycleableChange = () => setRecycleable(!recycleable)
+
+  const handleFormChange = event => {
+    event.persist()
+    setItem(prevItem => {
+      const updatedField = { [event.target.name]: event.target.value }
+      const editedItem = Object.assign({}, prevItem, updatedField)
+      return editedItem
+    })
   }
 
   const addNewItem = event => {
     event.preventDefault()
-    const data = new FormData()
-    data.append('name', name)
-    data.append('recycleable', recycleable)
-    data.append('description', description)
-    data.append('barcode', barcode)
+    const data = {...item, recycleable}
       addItem(user, data)
         .then(res => console.log(res))
-        .then(() => msgAlert({
-            heading: 'Picture Successfully Uploaded',
-            message: 'Click to add more pictures to your account!',
-            variant: 'success'
-          }))
         .catch(error => {
           msgAlert({
             heading: 'Failed to Upload Picture ',
@@ -66,9 +56,9 @@ const AddItem = ({ user, msgAlert }) => {
             <Form.Control
               type="text"
               name="name"
-              value={name}
+              value={item.name}
               placeholder="Enter name"
-              onChange={handleNameChange}
+              onChange={handleFormChange}
             />
           </Form.Group>
           <Form.Group controlId="recycleable">
@@ -76,6 +66,7 @@ const AddItem = ({ user, msgAlert }) => {
               <Form.Control
                 type="checkbox"
                 name="recycleable"
+                value={recycleable}
                 onChange={handleRecycleableChange}
               />
             </Form.Group>
@@ -84,9 +75,9 @@ const AddItem = ({ user, msgAlert }) => {
                 <Form.Control
                   type="text"
                   name="description"
-                  value={description}
+                  value={item.description}
                   placeholder="Enter Description"
-                  onChange={handleDescriptionChange}
+                  onChange={handleFormChange}
                 />
               </Form.Group>
               <Form.Group controlId="barcode">
@@ -94,15 +85,15 @@ const AddItem = ({ user, msgAlert }) => {
                   <Form.Control
                     type="text"
                     name="barcode"
-                    value={barcode}
+                    value={item.barcode}
                     placeholder="Enter Barcode"
-                    onChange={handleBarcodeChange}
+                    onChange={handleFormChange}
                   />
                 </Form.Group>
-        <Button
-          type="submit"
-          className="bubble"
-        >
+            <Button
+              type="submit"
+              className="bubble"
+            >
         Submit
         </Button>
         </Form>

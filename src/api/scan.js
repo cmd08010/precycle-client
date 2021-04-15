@@ -47,13 +47,13 @@ export const scanIndex = user => {
 }
 
 export const addItem = (user, data) => {
-  console.log(data, "my api data")
+  console.log(data, "my api data", data.name)
   return axios({
     method: 'POST',
     url: apiUrl + '/add-item/',
     headers: {
         'Authorization': `Token ${user.token}`
       },
-      data,
+      data
   })
 }
