@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
-import { scanIndex, sendScan } from '../../api/scan'
+import { scanIndex, sendScan, scanItem } from '../../api/scan'
 
 import Form from 'react-bootstrap/Form'
 import FormFile from 'react-bootstrap/FormFile'
@@ -40,7 +40,7 @@ const Scanner = ({ user, msgAlert }) => {
     }
     if(form === "barcode") {
       dataInfo.barcode = data
-      sendScan(user, data)
+      scanItem(user, data)
         .then(res => console.log(res))
         .then(() => msgAlert({
             heading: 'Picture Successfully Uploaded',

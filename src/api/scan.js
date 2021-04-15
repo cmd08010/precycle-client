@@ -46,6 +46,20 @@ export const scanIndex = user => {
   })
 }
 
+export const scanItem = (user, data) => {
+  return axios({
+    url: apiUrl + '/scan-item/',
+    method: 'GET',
+    // include an authorization header, that includes our user's token
+    // so the API knows who to sign out
+    headers: {
+      'Authorization': `Token ${user.token}`
+    },
+    data
+  })
+}
+
+
 export const addItem = (user, data) => {
   console.log(data, "my api data", data.name)
   return axios({

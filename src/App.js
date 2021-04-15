@@ -3,7 +3,6 @@ import { Route } from 'react-router-dom'
 import { v4 as uuid } from 'uuid'
 
 import AuthenticatedRoute from './components/AuthenticatedRoute/AuthenticatedRoute'
-import SuperUserRoute from './components/AuthenticatedRoute/SuperUserRoute'
 import AutoDismissAlert from './components/AutoDismissAlert/AutoDismissAlert'
 import Header from './components/Header/Header'
 import SignUp from './components/SignUp/SignUp'
@@ -75,8 +74,8 @@ class App extends Component {
           <AuthenticatedRoute user={user} path='/barcode' render={() => (
             <Barcode msgAlert={this.msgAlert} user={user} />
           )} />
-           <AuthenticatedRoute user={user} path='/add-item' render={() => (
-            <AddItem msgAlert={this.msgAlert} user={user} />
+         <AuthenticatedRoute user={user} path='/add-item' render={() => (
+            <div>{user.is_superuser && <AddItem msgAlert={this.msgAlert} user={user} />}</div>
           )} />
         </main>
       </Fragment>
