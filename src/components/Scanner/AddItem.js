@@ -10,7 +10,7 @@ import Spinner from 'react-bootstrap/Spinner'
 import { Col } from 'react-bootstrap'
 import Barcode from './Barcode'
 
-const Scanner = ({ user, msgAlert }) => {
+const AddItem = ({ user, msgAlert }) => {
   const [caption, setCaption] = useState('')
   const [text, setText] = useState('')
   const [form, setForm] = useState(null)
@@ -148,4 +148,4 @@ const Scanner = ({ user, msgAlert }) => {
   )
 }
 
-export default withRouter(Scanner)
+export default withRouter(AddItem)

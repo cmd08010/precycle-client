@@ -33,6 +33,7 @@ const Header = ({ user }) => (
         { user && <span className="navbar-text mr-2">Welcome, {user.email}</span>}
         { alwaysOptions }
         { user ? authenticatedOptions : unauthenticatedOptions }
+        { user ? user.is_superuser ?  : unauthenticatedOptions }
       </Nav>
     </Navbar.Collapse>
   </Navbar>

@@ -52,20 +52,7 @@ function Barcode({ user, msgAlert, data, setData }) {
       />
       </div>
     }
-    { data && <p>{data}</p>}
-    {// <Form onSubmit={saveBarcode}>
-    // <Form.Group controlId="caption">
-    // <Form.Label>Barcode</Form.Label>
-    // <Barcode />
-    // </Form.Group>
-    // <Button
-    // type="submit"
-    // className="bubble"
-    // >
-    // Submit
-    // </Button>
-    // </Form>}
-  }
+    { data && <p>Barcode: {data}</p>}
     </div>
   )
 }

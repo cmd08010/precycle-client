@@ -3,6 +3,7 @@ import axios from 'axios'
 
 export const sendScan = (user, data) => {
   console.log(data, "my api data")
+  if (!data.barcode) {
   return axios({
     method: 'POST',
     url: apiUrl + '/scans/',
@@ -13,9 +14,24 @@ export const sendScan = (user, data) => {
       name: data,
       recycleable: false,
       description: "test description",
-      barcode: "test barcode"
+      barcode: "none"
     }
   })
+} else {
+  return axios({
+    method: 'POST',
+    url: apiUrl + '/scans/',
+    headers: {
+        'Authorization': `Token ${user.token}`
+      },
+    data: {
+      name: "name",
+      recycleable: false,
+      description: "test description",
+      barcode: data.barcode
+    }
+  })
+}
 }
 
 export const scanIndex = user => {

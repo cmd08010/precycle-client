@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom'
 import { v4 as uuid } from 'uuid'
 
 import AuthenticatedRoute from './components/AuthenticatedRoute/AuthenticatedRoute'
+import SuperUserRoute from './components/AuthenticatedRoute/SuperUserRoute'
 import AutoDismissAlert from './components/AutoDismissAlert/AutoDismissAlert'
 import Header from './components/Header/Header'
 import SignUp from './components/SignUp/SignUp'
@@ -10,6 +11,7 @@ import SignIn from './components/SignIn/SignIn'
 import SignOut from './components/SignOut/SignOut'
 import Scanner from './components/Scanner/Scanner'
 import Barcode from './components/Scanner/Barcode'
+import AddItem from './components/Scanner/AddItem'
 import ChangePassword from './components/ChangePassword/ChangePassword'
 
 class App extends Component {
@@ -72,6 +74,9 @@ class App extends Component {
           )} />
           <AuthenticatedRoute user={user} path='/barcode' render={() => (
             <Barcode msgAlert={this.msgAlert} user={user} />
+          )} />
+           <SuperUserRoute user={user} path='/add-item' render={() => (
+            <AddItem msgAlert={this.msgAlert} user={user} />
           )} />
         </main>
       </Fragment>
