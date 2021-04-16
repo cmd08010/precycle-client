@@ -47,16 +47,28 @@ export const scanIndex = user => {
 }
 
 export const scanItem = (user, data) => {
-  console.log(data, "in my api")
+  const key = Object.keys(data)[0]
+  const value = data[key]
+  console.log(data, value, key, "in my api")
   return axios({
-    url: apiUrl + '/scan-item/',
-    method: 'POST',
-    // include an authorization header, that includes our user's token
-    // so the API knows who to sign out
+    url: `${apiUrl}/scan-item/${value}`,
+    method: 'GET',
     headers: {
       'Authorization': `Token ${user.token}`
-    },
-    data
+    }
+  })
+}
+
+export const scanItemWithApi = (user, data) => {
+  const key = Object.keys(data)[0]
+  const value = data[key]
+  console.log(data, value, key, "in my api")
+  return axios({
+    url: `${apiUrl}/scan-item/${value}/api`,
+    method: 'GET',
+    headers: {
+      'Authorization': `Token ${user.token}`
+    }
   })
 }
 
