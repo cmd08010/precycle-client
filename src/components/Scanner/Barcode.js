@@ -25,12 +25,13 @@ function Barcode({ user, msgAlert, barcode, setBarcode, formData, setFormData}) 
   console.log("in barcode component")
 
   return (
-    <div>
+    <div className="toggle">
     <BootstrapSwitchButton
     checked={checked}
-    onlabel='Scan'
-    offlabel='Stop'
+    onlabel='Stop Scan'
+    offlabel='Begin Scan'
     onChange={beginBarcodeScan}
+    width={200} height={45}
     />
 
     { !checked && <div>

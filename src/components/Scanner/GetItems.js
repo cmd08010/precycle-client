@@ -21,8 +21,9 @@ useEffect(() => {
         <h2>Get Items</h2>
         {items.map(item => {
           return (
-            <div key={item.id}>
+            <div key={item.id} className={item.recycleable ? "recycleable" : "not-recycleable"}>
             <h3>Name : {item.name}</h3>
+            <p>Owner: {item.owner}</p>
             <p>Recyclable?: {item.recycleable ? "yes" : "no"}</p>
             <p>Description: {item.description}</p>
             <p>Barcode: {item.barcode}</p>

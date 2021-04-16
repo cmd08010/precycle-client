@@ -10,19 +10,19 @@ import Image from 'react-bootstrap/Image'
 const Admin = ({ user, msgAlert }) => {
   const [users, setUsers] = useState([])
   const [active, setActive] = useState(true)
-  const [response, setResponse] = useState('')
+  const [rerender, setRerender] = useState('')
 
 useEffect(() => {
   console.log("in use effect")
   getUsersForAdmin(user)
     .then(res => setUsers(res.data.users))
-}, [response])
+}, [rerender])
 
-const changeUserStatus = ( id) => {
+const changeUserStatus = (id) => {
   console.log(id,"my user")
   setActive(!user.is_active)
-  deactivateAUser(user, id.user.id, active)
-  .then(res => setResponse('done'))
+  deactivateAUser(user, id.aUser.id, active)
+  .then(res => setRerender(Date.now()+user.id))
 
 }
 
@@ -32,19 +32,20 @@ const changeUserStatus = ( id) => {
       <div className="col-sm-10 col-md-8 mx-auto mt-5">
       <div className="bubble">
         <h2>Check users</h2>
-        {users.map(user => {
+        {users.map(aUser => {
           return (
-            <div key={user.id}>
-            <p>{user.email}</p>
-            <p>{user.id}</p>
-            <p>Active?: {user.is_active ? "yes" : "no"}</p>
+            <div key={aUser.id} className={aUser.is_superuser ? "admin" : "user"}>
+            <p>Email: {aUser.email}</p>
+            <p>id: {aUser.id}</p>
+            <p>Role: {aUser.is_superuser ? "admin" : "user"} </p>
+            <p>Active?: {aUser.is_active ? "yes" : "no"}</p>
             <Button
               type="submit"
               variant="outline-secondary"
               className="bubble"
-              onClick={() => changeUserStatus({user})}
+              onClick={() => changeUserStatus({aUser})}
             >
-            {user.is_active ? "Deactivate" : "Activate"} user
+            {aUser.is_active ? "Deactivate" : "Activate"} User
             </Button>
             <hr/>
             </div>

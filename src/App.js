@@ -74,6 +74,9 @@ class App extends Component {
           <AuthenticatedRoute user={user} path='/home' render={() => (
             <Scanner msgAlert={this.msgAlert} user={user} />
           )} />
+          <AuthenticatedRoute user={user} exact path='/' render={() => (
+            <Scanner msgAlert={this.msgAlert} user={user} />
+          )} />
           <AuthenticatedRoute user={user} path='/barcode' render={() => (
             <Barcode msgAlert={this.msgAlert} user={user} />
           )} />

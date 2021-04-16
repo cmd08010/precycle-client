@@ -54,7 +54,7 @@ export const scanItemWithApi = (user, data) => {
 export const getItems = (user) => {
   return axios({
     method: 'GET',
-    url: apiUrl + '/get-items/',
+    url: apiUrl + '/items/',
     headers: {
         'Authorization': `Token ${user.token}`
       },
@@ -64,7 +64,7 @@ export const getItems = (user) => {
 export const addItem = (user, data) => {
   return axios({
     method: 'POST',
-    url: apiUrl + '/add-item/',
+    url: apiUrl + '/items/',
     headers: {
         'Authorization': `Token ${user.token}`
       },
@@ -75,10 +75,9 @@ export const addItem = (user, data) => {
 export const deleteScan = (user, data) => {
   return axios({
     method: 'DELETE',
-    url: apiUrl + '/delete-item/',
+    url: apiUrl + '/scans/' + data.id ,
     headers: {
         'Authorization': `Token ${user.token}`
-      },
-      data
+      }
   })
 }

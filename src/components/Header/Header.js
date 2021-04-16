@@ -43,8 +43,11 @@ const Header = ({ user }) => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto">
             { user && <span className="navbar-text mr-2">Welcome, {user.email}, You are an admin.</span>}
-            { alwaysOptions }
+            <hr/>
+            Admin Options:
             { superUserOptions }
+            <hr/>
+            { alwaysOptions }
             { authenticatedOptions }
           </Nav>
         </Navbar.Collapse>
