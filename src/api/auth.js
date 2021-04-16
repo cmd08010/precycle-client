@@ -65,3 +65,15 @@ export const getUsersForAdmin = (user) => {
     }
   })
 }
+
+export const deactivateAUser = (user, id, data) => {
+  console.log(id, "id in api")
+  return axios({
+    url: `${apiUrl}/users/${id}/`,
+    method: 'PATCH',
+    headers: {
+      'Authorization': `Token ${user.token}`
+    },
+    data: { is_active: data }
+  })
+}

@@ -1,26 +1,30 @@
 import React, { useState, useEffect } from 'react'
-import Link from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router-dom'
 import { scanIndex, addItem } from '../../api/scan'
-import { getUsersForAdmin } from '../../api/auth'
+import { getUsersForAdmin, deactivateAUser } from '../../api/auth'
 
-
-import Form from 'react-bootstrap/Form'
-import FormFile from 'react-bootstrap/FormFile'
 import Button from 'react-bootstrap/Button'
 import Image from 'react-bootstrap/Image'
-import Spinner from 'react-bootstrap/Spinner'
-import { Col } from 'react-bootstrap'
-import Barcode from './Barcode'
 
 const Admin = ({ user, msgAlert }) => {
   const [users, setUsers] = useState([])
+  const [active, setActive] = useState(true)
+  const [response, setResponse] = useState('')
 
 useEffect(() => {
+  console.log("in use effect")
   getUsersForAdmin(user)
-    .then(res => setUsers([res.data]))
-}, [])
+    .then(res => setUsers(res.data.users))
+}, [response])
 
+const changeUserStatus = ( id) => {
+  console.log(id,"my user")
+  setActive(!user.is_active)
+  deactivateAUser(user, id.user.id, active)
+  .then(res => setResponse('done'))
+
+}
 
   return (
     <div className="container">
@@ -30,7 +34,20 @@ useEffect(() => {
         <h2>Check users</h2>
         {users.map(user => {
           return (
-            <Link path='/users/:id'> <p>user.email</p></Link>
+            <div key={user.id}>
+            <p>{user.email}</p>
+            <p>{user.id}</p>
+            <p>Active?: {user.is_active ? "yes" : "no"}</p>
+            <Button
+              type="submit"
+              variant="outline-secondary"
+              className="bubble"
+              onClick={() => changeUserStatus({user})}
+            >
+            {user.is_active ? "Deactivate" : "Activate"} user
+            </Button>
+            <hr/>
+            </div>
           )
         })}
         </div>

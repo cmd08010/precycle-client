@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { withRouter } from 'react-router-dom'
-import { scanItem, saveScan, scanItemWithApi } from '../../api/scan'
+import { scanItem, addScan, scanItemWithApi } from '../../api/scan'
 import BootstrapSwitchButton from 'bootstrap-switch-button-react'
 
 import Form from 'react-bootstrap/Form'
@@ -14,8 +14,9 @@ const Scanner = ({ user, msgAlert }) => {
   const [response, setResponse] = useState(undefined)
   const [barcode, setBarcode] = useState('Not Found')
   const [api, setApi] = useState(false)
+  const [msg, setMsg] = useState('')
   const [formData, setFormData] = useState({})
-  let numberOfApiCalls = 49
+  const [numberOfApiCalls, setNumberOfApiCalls ] = useState(40)
   const [form, setForm] = useState(null)
   const [loading, setLoading] = useState(false)
 
@@ -25,18 +26,25 @@ const Scanner = ({ user, msgAlert }) => {
   }
 
   const sendScanToApi = event => {
+    setLoading(true)
     event.preventDefault()
     if (!api) {
     scanItem(user, formData)
       .then(res => {
-        console.log(res)
+        setLoading(false)
         setResponse(res.data.items)
       })
     } else {
       scanItemWithApi(user, formData)
         .then(res => {
-          console.log(res)
-            setResponse(res.data.item.products)
+          setLoading(false)
+          setNumberOfApiCalls(prevNum => prevNum--)
+          setResponse(res.data.item.products)
+        })
+        .catch(err => {
+          console.log(err)
+          setLoading(false)
+          setMsg('Item Not found!')
         })
     }
       // .then(() => msgAlert({
@@ -56,7 +64,7 @@ const Scanner = ({ user, msgAlert }) => {
   const addImage = () => {}
 
   const postSavedScan = (event) => {
-    saveScan(response)
+    addScan(user, response)
     .then(res => console.log(res))
 
   }
@@ -66,7 +74,6 @@ const Scanner = ({ user, msgAlert }) => {
   }
 
   const useApi = (event) => {
-    numberOfApiCalls--
     setApi(!api)
   }
 
@@ -100,15 +107,6 @@ const Scanner = ({ user, msgAlert }) => {
           <Button
             variant="link"
             type="button"
-            name="image"
-            className="bubble"
-            onClick={showCorrectForm}
-          >
-          Image
-          </Button>
-          <Button
-            variant="link"
-            type="button"
             name="barcode-number"
             className="bubble"
             onClick={showCorrectForm}
@@ -118,15 +116,6 @@ const Scanner = ({ user, msgAlert }) => {
         </div>
 
         <Form onSubmit={sendScanToApi}>
-          {form === "image" &&<Form.Group controlId="image">
-            <FormFile
-              required
-              id="upload-file-input"
-              label="Upload File Here"
-              name="barcode-image"
-              onChange={addImage}
-            />
-          </Form.Group>}
           {form === "text" && <Form.Group controlId="text">
             <Form.Label>Type in your item name !</Form.Label>
             <Form.Control
@@ -172,6 +161,7 @@ const Scanner = ({ user, msgAlert }) => {
         onChange={useApi}
         />
         </div>}
+        {loading && <Spinner animation="border"/>}
         {response && response.map(res => {
             return (<div key={response.indexOf(res)}>
                 <h3>{res.barcode_number}</h3>
@@ -188,7 +178,7 @@ const Scanner = ({ user, msgAlert }) => {
                 </div>
                 )
             })}
-            {response === [] && <div>no response</div>}
+            {msg && <div>{msg}</div>}
       </div>
     </div>
   </div>

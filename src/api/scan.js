@@ -1,40 +1,19 @@
 import apiUrl from '../apiConfig'
 import axios from 'axios'
 
-export const saveScan = (user, data) => {
-  console.log(data, "my api data")
-  if (!data.barcode) {
+export const addScan = (user, data) => {
   return axios({
     method: 'POST',
     url: apiUrl + '/scans/',
     headers: {
         'Authorization': `Token ${user.token}`
       },
-    data: {
-      name: data,
-      recycleable: false,
-      description: "test description",
-      barcode: "none"
-    }
+    data: data
   })
-} else {
-  return axios({
-    method: 'POST',
-    url: apiUrl + '/scans/',
-    headers: {
-        'Authorization': `Token ${user.token}`
-      },
-    data: {
-      name: "name",
-      recycleable: false,
-      description: "test description",
-      barcode: data.barcode
-    }
-  })
-}
 }
 
-export const scanIndex = user => {
+export const getScans = user => {
+  console.log(user, "my api data")
   return axios({
     url: apiUrl + '/scans/',
     method: 'GET',
@@ -86,6 +65,17 @@ export const addItem = (user, data) => {
   return axios({
     method: 'POST',
     url: apiUrl + '/add-item/',
+    headers: {
+        'Authorization': `Token ${user.token}`
+      },
+      data
+  })
+}
+
+export const deleteScan = (user, data) => {
+  return axios({
+    method: 'DELETE',
+    url: apiUrl + '/delete-item/',
     headers: {
         'Authorization': `Token ${user.token}`
       },
