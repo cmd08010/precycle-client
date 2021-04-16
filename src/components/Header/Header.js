@@ -19,6 +19,7 @@ const unauthenticatedOptions = (
 const superUserOptions = (
   <Fragment>
     <Nav.Link href="#add-item">Add Items</Nav.Link>
+    <Nav.Link href="#get-items">Get Items</Nav.Link>
     <Nav.Link href="#change-password">Change Password</Nav.Link>
     <Nav.Link href="#sign-out">Sign Out</Nav.Link>
   </Fragment>

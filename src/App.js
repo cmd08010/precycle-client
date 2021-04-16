@@ -11,6 +11,7 @@ import SignOut from './components/SignOut/SignOut'
 import Scanner from './components/Scanner/Scanner'
 import Barcode from './components/Scanner/Barcode'
 import AddItem from './components/Scanner/AddItem'
+import GetItems from './components/Scanner/GetItems'
 import ChangePassword from './components/ChangePassword/ChangePassword'
 
 class App extends Component {
@@ -77,6 +78,9 @@ class App extends Component {
          <AuthenticatedRoute user={user} path='/add-item' render={() => (
             <div>{user.is_superuser && <AddItem msgAlert={this.msgAlert} user={user} />}</div>
           )} />
+          <AuthenticatedRoute user={user} path='/get-items' render={() => (
+             <div>{user.is_superuser && <GetItems msgAlert={this.msgAlert} user={user} />}</div>
+           )} />
         </main>
       </Fragment>
     )

@@ -1,7 +1,7 @@
 import apiUrl from '../apiConfig'
 import axios from 'axios'
 
-export const sendScan = (user, data) => {
+export const saveScan = (user, data) => {
   console.log(data, "my api data")
   if (!data.barcode) {
   return axios({
@@ -47,9 +47,10 @@ export const scanIndex = user => {
 }
 
 export const scanItem = (user, data) => {
+  console.log(data, "in my api")
   return axios({
     url: apiUrl + '/scan-item/',
-    method: 'GET',
+    method: 'POST',
     // include an authorization header, that includes our user's token
     // so the API knows who to sign out
     headers: {
@@ -59,9 +60,17 @@ export const scanItem = (user, data) => {
   })
 }
 
+export const getItems = (user) => {
+  return axios({
+    method: 'GET',
+    url: apiUrl + '/get-items/',
+    headers: {
+        'Authorization': `Token ${user.token}`
+      },
+  })
+}
 
 export const addItem = (user, data) => {
-  console.log(data, "my api data", data.name)
   return axios({
     method: 'POST',
     url: apiUrl + '/add-item/',
