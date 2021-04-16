@@ -53,3 +53,27 @@ export const changePassword = (passwords, user) => {
     }
   })
 }
+
+export const getUsersForAdmin = (user) => {
+  return axios({
+    url: apiUrl + '/users/',
+    method: 'GET',
+    // include an authorization header, that includes our user's token
+    // so the API knows who to sign out
+    headers: {
+      'Authorization': `Token ${user.token}`
+    }
+  })
+}
+
+export const deactivateAUser = (user, id, data) => {
+  console.log(id, "id in api")
+  return axios({
+    url: `${apiUrl}/users/${id}/`,
+    method: 'PATCH',
+    headers: {
+      'Authorization': `Token ${user.token}`
+    },
+    data: { is_active: data }
+  })
+}

@@ -5,17 +5,18 @@ import { sendScan } from '../../api/scan'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
-function Barcode({ user, msgAlert, data, setData }) {
+function Barcode({ user, msgAlert, barcode, setBarcode, formData, setFormData}) {
   const [ err, setErr ] = useState(null)
   const [ checked, setChecked ] = useState(false)
   const [ msg, setMsg ] = useState('')
 
   const beginBarcodeScan = () => {
-    console.log(data)
+    console.log(barcode)
     setChecked(true)
     setTimeout(() => {
+
       setChecked(false)
-      if(data === 'Not Found') {
+      if(barcode === 'Not Found') {
         setMsg("Please try again")
       }
     }, 3700)
@@ -42,7 +43,9 @@ function Barcode({ user, msgAlert, data, setData }) {
       height={500}
       onUpdate={(err, result) => {
         if (result) {
-          setData(result.text)
+          console.log(result, "my scan result")
+          setBarcode(result.text)
+          setFormData({ barcode: result.text })
           setMsg("Hit submit to get a result!")
         }
         if (err) {
@@ -52,7 +55,7 @@ function Barcode({ user, msgAlert, data, setData }) {
       />
       </div>
     }
-    { data && <p>Barcode: {data}</p>}
+    { barcode !== 'Not Found' && <p> Barcode: {barcode}</p>}
     </div>
   )
 }
