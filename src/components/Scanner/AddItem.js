@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
 import { scanIndex, addItem } from '../../api/scan'
+import { getMaterials } from '../../api/material'
 
 import Form from 'react-bootstrap/Form'
 import FormFile from 'react-bootstrap/FormFile'
@@ -14,9 +15,19 @@ const AddItem = ({ user, msgAlert }) => {
   const [item, setItem] = useState({
     name: '',
     description: '',
-    barcode: ''
+    barcode: '',
+    material: ''
   })
   const [recycleable, setRecycleable] = useState(false)
+  const [materials, setMaterials] = useState([])
+
+  useEffect(() => {
+    getMaterials(user)
+    .then(res => {
+      console.dir(res.data.materials)
+      setMaterials(res.data.materials)
+    })
+  },[])
 
   const handleRecycleableChange = () => setRecycleable(!recycleable)
 
@@ -80,6 +91,21 @@ const AddItem = ({ user, msgAlert }) => {
                   onChange={handleFormChange}
                 />
               </Form.Group>
+             {materials && <Form.Group controlId="material">
+                  <Form.Label>Material</Form.Label>
+                  <Form.Control
+                    as="select"
+                    name="material"
+                    custom
+                    onChange={handleFormChange}
+                  >
+                  {materials.map(material => {
+                    return (
+                      <option key={material.id}>{material.name}</option>
+                    )
+                  })}
+                  </Form.Control>
+                </Form.Group>}
               <Form.Group controlId="barcode">
                   <Form.Label>Barcode</Form.Label>
                   <Form.Control
