@@ -29,8 +29,15 @@ const Scanner = ({ user, msgAlert }) => {
     if (!api) {
       scanItem(user, formData)
       .then(res => {
+        console.log(res.status, "my response")
         setLoading(false)
+        setFormData({})
         setResponse(res.data.items)
+      })
+      .catch(err => {
+        console.log(err, "err")
+        setLoading(false)
+        setMsg('Item Not found!')
       })
     } else {
       scanItemWithApi(user, formData)
@@ -40,7 +47,7 @@ const Scanner = ({ user, msgAlert }) => {
         setResponse(res.data.item.products)
       })
       .catch(err => {
-        console.log(err)
+        console.log(err, "err")
         setLoading(false)
         setMsg('Item Not found!')
       })

@@ -21,6 +21,15 @@ h2 {
   color: #E6E8E2;
 }
 
+.scanner-form {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: stretch;
+  padding: 15px;
+  height: auto;
+  width: auto;
+}
+
 .toggle {
   width: 100px;
   height: 100px;

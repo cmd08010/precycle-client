@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { Route } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import { v4 as uuid } from 'uuid'
 
 import AuthenticatedRoute from './components/AuthenticatedRoute/AuthenticatedRoute'
@@ -14,6 +14,7 @@ import AddItem from './components/Scanner/AddItem'
 import GetItems from './components/Scanner/GetItems'
 import Scans from './components/Scanner/Scans'
 import Admin from './components/Admin/Admin'
+import NotFound from './components/NotFound'
 import ChangePassword from './components/ChangePassword/ChangePassword'
 
 class App extends Component {
@@ -59,6 +60,7 @@ class App extends Component {
           />
         ))}
         <main className="container">
+        <Switch>
           <Route path='/sign-up' render={() => (
             <SignUp msgAlert={this.msgAlert} setUser={this.setUser} />
           )} />
@@ -92,6 +94,8 @@ class App extends Component {
            <AuthenticatedRoute user={user} path='/users' render={() => (
               <div>{user.is_superuser && <Admin msgAlert={this.msgAlert} user={user} />}</div>
             )} />
+            <Route path="*" component={NotFound} status={404} />
+          </Switch>
         </main>
       </Fragment>
     )
