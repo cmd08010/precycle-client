@@ -14,6 +14,8 @@ import AddItem from './components/Scanner/AddItem'
 import GetItems from './components/Scanner/GetItems'
 import Scans from './components/Scanner/Scans'
 import Admin from './components/Admin/Admin'
+import AddMaterial from './components/Materials/AddMaterial'
+import Materials from './components/Materials/Materials'
 import NotFound from './components/NotFound'
 import ChangePassword from './components/ChangePassword/ChangePassword'
 
@@ -94,7 +96,12 @@ class App extends Component {
            <AuthenticatedRoute user={user} path='/users' render={() => (
               <div>{user.is_superuser && <Admin msgAlert={this.msgAlert} user={user} />}</div>
             )} />
-            <Route path="*" component={NotFound} status={404} />
+            <AuthenticatedRoute user={user} path='/add-material' render={() => (
+               <div>{user.is_superuser && <AddMaterial msgAlert={this.msgAlert} user={user} />}</div>
+             )} />
+             <AuthenticatedRoute user={user} path='/materials' render={() => (
+                <div>{user.is_superuser && <Materials msgAlert={this.msgAlert} user={user} />}</div>
+              )} />
           </Switch>
         </main>
       </Fragment>

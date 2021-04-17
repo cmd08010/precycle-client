@@ -25,14 +25,15 @@ const Scanner = ({ user, msgAlert }) => {
 
   const sendScanToApi = event => {
     setLoading(true)
+    setResponse(undefined)
     event.preventDefault()
     if (!api) {
       scanItem(user, formData)
       .then(res => {
         console.log(res.status, "my response")
         setLoading(false)
-        setFormData({})
         setResponse(res.data.items)
+        setMsg('')
       })
       .catch(err => {
         console.log(err, "err")

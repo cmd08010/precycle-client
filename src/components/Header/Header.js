@@ -22,6 +22,8 @@ const superUserOptions = (
     <Nav.Link href="#users">Users</Nav.Link>
     <Nav.Link href="#add-item">Add Items</Nav.Link>
     <Nav.Link href="#get-items">Get Items</Nav.Link>
+    <Nav.Link href="#add-material">Add Material</Nav.Link>
+    <Nav.Link href="#materials">Get Materials</Nav.Link>
   </Fragment>
 )
 
