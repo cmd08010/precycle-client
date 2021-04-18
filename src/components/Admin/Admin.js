@@ -49,7 +49,6 @@ useEffect(() => {
           <Link to="/admin/users" className="links">Users</Link>
           <Link to="/admin/add-item" className="links">Add Items</Link>
           <Link to="/admin/get-items" className="links">Get Items</Link>
-          <Link to='/admin/update-item/:id' className="links">Get Items</Link>
           <Link to="/admin/add-material" className="links">Add Material</Link>
           <Link to="/admin/materials" className="links">Get Materials</Link>
           </div>
