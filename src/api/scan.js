@@ -82,3 +82,25 @@ export const deleteScan = (user, data) => {
       }
   })
 }
+
+export const updateItem = (user, id, data) => {
+  console.log(id, "id in api")
+  return axios({
+    url: `${apiUrl}/items/`,
+    method: 'PATCH',
+    headers: {
+      'Authorization': `Token ${user.token}`
+    },
+    data
+  })
+}
+export const deleteItem = (user, id) => {
+  console.log(id, "id in api")
+  return axios({
+    url: `${apiUrl}/items/${id}`,
+    method: 'DELETE',
+    headers: {
+      'Authorization': `Token ${user.token}`
+    },
+  })
+}

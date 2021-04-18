@@ -6,6 +6,7 @@ import { getUsersForAdmin } from '../../api/auth'
 
 import Button from 'react-bootstrap/Button'
 import moment from 'moment'
+import Card from 'react-bootstrap/Card'
 
 const Scans = ({ user, msgAlert }) => {
   const [scans, setScans] = useState([])
@@ -32,54 +33,69 @@ const deleteThisScan = (scan) => {
   return (
     <div className="container">
     <div className="row">
-      <div className="col-sm-10 col-md-8 mx-auto mt-5">
-      <div className="bubble">
+      <div className="col-sm-12 col-md-10 mx-auto mt-5">
         <div className="header-2">Get My Scans</div>
+        <div className="cards">
         {myScans.map(scan => {
             return (
                 <div key={scan.id}>
-                <div className="header-4">Created at: {moment(scan.created_at).format('MM/DD/YYYY')}</div>
-                <p>{scan.name}</p>
-                <p>Owner: {scan.owner}</p>
-                <p>Recyclable?: {scan.recycleable ? "yes" : "no"}</p>
-                <p>Description: {scan.description}</p>
-                <p>Barcode: {scan.barcode}</p>
-                <Button
-                  type="submit"
-                  variant="outline-secondary"
-                  onClick={()=> deleteThisScan(scan)}
-                  >
-                  Delete
-                </Button>
+                <Card style={{ width: '18rem' }}>
+                  <Card.Body>
+                    <Card.Title><div className="header-5">Created at: {moment(scan.created_at).format('MM/DD/YYYY')}</div></Card.Title>
+                    <Card.Text>
+                      <p>{scan.name}</p>
+                      <p>Recyclable?: {scan.recycleable ? "yes" : "no"}</p>
+                      <p>Description: {scan.description}</p>
+                      <p>Barcode: {scan.barcode}</p>
+                    </Card.Text>
+                    <Button
+                    type="submit"
+                    variant="outline-secondary"
+                    className="card-button"
+                    onClick={()=> deleteThisScan(scan)}
+                    >
+                    Delete
+                    </Button>
+                  </Card.Body>
+                </Card>
                   <hr />
                 </div>
               )
             })}
             <br/>
+            </div>
             {user.is_superuser && <div>
                 <div className="header-2">All Scans</div>
+                <div className="cards">
             {scans.map(scan => {
                 return (
                     <div key={scan.id}>
-                    <div className="header-4">Created at: {moment(scan.created_at).format('MM/DD/YYYY')}</div>
-                    <p>{scan.name}</p>
-                      <p>Owner: {scan.owner}</p>
-                      <p>Recyclable?: {scan.recycleable ? "yes" : "no"}</p>
-                      <p>Description: {scan.description}</p>
-                      <p>Barcode: {scan.barcode}</p>
-                      <Button
-                        type="submit"
-                        variant="outline-secondary"
-                        onClick={()=> deleteThisScan(scan)}
-                        >
-                        Delete
-                      </Button>
+                      <Card style={{ width: '18rem' }}>
+                        <Card.Body>
+                          <Card.Title><div className="header-5">Created at: {moment(scan.created_at).format('MM/DD/YYYY')}</div></Card.Title>
+                          <Card.Text>
+                            <p>{scan.name}</p>
+                            <p>Owner: {scan.owner}</p>
+                            <p>Recyclable?: {scan.recycleable ? "yes" : "no"}</p>
+                            <p>Description: {scan.description}</p>
+                            <p>Barcode: {scan.barcode}</p>
+                          </Card.Text>
+                          <Button
+                          type="submit"
+                          variant="outline-secondary"
+                          className="card-button"
+                          onClick={()=> deleteThisScan(scan)}
+                          >
+                          Delete
+                          </Button>
+                        </Card.Body>
+                      </Card>
                       <hr />
                     </div>
                   )
                 })}
+                </div>
             </div>}
-        </div>
       </div>
     </div>
   </div>

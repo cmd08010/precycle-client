@@ -1,6 +1,6 @@
 @import '~bootstrap/scss/bootstrap';
-@import url('https://fonts.googleapis.com/css2?family=Sacramento&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Bungee+Outline&family=Bungee+Shade&family=Lemon&family=Libre+Barcode+128+Text&family=Monoton&family=Orelega+One&family=PT+Mono&family=Potta+One&family=Train+One&family=Vast+Shadow&family=Viaoda+Libre&family=Zilla+Slab+Highlight:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Outline&family=Bungee+Shade&family=Lemon&family=Libre+Barcode+128+Text&family=Monoton&family=Orelega+One&family=PT+Mono&family=Pacifico&family=Potta+One&family=Train+One&family=Vast+Shadow&family=Viaoda+Libre&family=Zilla+Slab+Highlight:wght@400;700&display=swap');
 $secondary: #fbd1a2;
 $primary: #fc9f5b;
 $tertiary: #f7f6ef;
@@ -41,12 +41,22 @@ $quinary: #1a535c;
   color: $quinary;
 }
 
+.header-5{
+  font-family: 'Potta One', cursive;
+  width: auto;
+  height: auto;
+  font-size: 1.4rem;
+  margin: 30px;
+  text-align: center;
+  color: $quinary;
+}
+
 Nav {
   color: $tertiary;
   font-family: 'Train One', cursive;
 }
 h1 {
-  font-family: 'Sacramento', cursive;
+  font-family: 'Pacifico', cursive;
   border: 3px solid $quarternary;
   padding: 20px;
   text-align: center;
@@ -54,14 +64,15 @@ h1 {
 }
 
 h3 {
-  font-family: 'Sacramento', cursive;
+  font-family: 'Pacifico', cursive;
   padding: 20px;
   text-align: center;
   color: $quinary;
 }
 
 p {
-  font-size: 1.2rem;
+  font-size: 1rem;
+  font-family: 'Potta One', cursive;
 }
 
 
@@ -129,6 +140,24 @@ button {
 
 Button {
   width: 20%
+}
+
+.cards {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.card {
+  margin: 20px;
+}
+
+.card-text {
+  font-size: 2px;
+}
+
+.card-button {
+  width: 50%
 }
 
 .form-buttons {
