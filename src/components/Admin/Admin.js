@@ -44,8 +44,8 @@ useEffect(() => {
     <div className="container">
     <div className="row">
       <div className="admin-panel">
-        <h1>Admin Panel</h1>
-        <div className="links">
+        <div className="header-1">Admin Panel</div>
+        <div className="links-container">
           <Link to="/admin/users" className="links">Users</Link>
           <Link to="/admin/add-item" className="links">Add Items</Link>
           <Link to="/admin/get-items" className="links">Get Items</Link>

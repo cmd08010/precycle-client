@@ -7,20 +7,40 @@ $tertiary: #f7f6ef;
 $quarternary: #7dcfb6;
 $quinary: #1a535c;
 
+body {
+  -webkit-text-size-adjust: none;
+}
 
-.header-2 {
-  font-family: 'Potta One', cursive;
-  font-size: 3rem;
+.header-1 {
+  font-family: 'Pacifico', cursive;
+  width: auto;
+  height: auto;
   border-bottom: 3px solid $quarternary ;
   border-top: 3px solid $quarternary ;
   border-width: 1rem;
   padding: 20px;
+  font-size: 3rem;
+  margin: 30px;
+  text-align: center;
+  white-space: nowrap;
+  color: $quinary;
+}
+
+.header-2 {
+  font-family: 'Pacifico', cursive;
+  white-space: nowrap;
+  font-size: 3rem;
+  border-bottom: 3px solid $quarternary ;
+  border-top: 3px solid $quarternary ;
+  border-width: 1rem;
+  padding: 30px;
   text-align: center;
   color: $quinary;
 }
 
 .header-3 {
   font-family: 'Bungee Shade', cursive;
+  white-space: normal;
   font-size: 3rem;
   border-bottom: 3px solid $quarternary ;
   border-top: 3px solid $quarternary ;
@@ -28,6 +48,7 @@ $quinary: #1a535c;
   padding: 20px;
   margin: 30px;
   text-align: center;
+  white-space: nowrap;
   color: $quinary;
 }
 
@@ -38,6 +59,7 @@ $quinary: #1a535c;
   font-size: 2rem;
   margin: 30px;
   text-align: center;
+  white-space: nowrap;
   color: $quinary;
 }
 
@@ -226,8 +248,16 @@ form {
 }
 
 .links {
+  justify-content: space-around;
   padding: 10px;
+  font-size: 1.2rem;
   color: $quinary;
+}
+
+.links-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 .toggle {
   width: auto;
