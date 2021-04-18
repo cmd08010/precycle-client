@@ -5,6 +5,7 @@ import { getScans, deleteScan } from '../../api/scan'
 import { getUsersForAdmin } from '../../api/auth'
 
 import Button from 'react-bootstrap/Button'
+import moment from 'moment'
 
 const Scans = ({ user, msgAlert }) => {
   const [scans, setScans] = useState([])
@@ -39,6 +40,7 @@ const deleteThisScan = (scan) => {
                 <div key={scan.id}>
                 <h3>Name : {scan.name}</h3>
                 <p>Owner: {scan.owner}</p>
+                <p>Created at: {moment(scan.created_at).format('MM/DD/YYYY')}</p>
                 <p>Recyclable?: {scan.recycleable ? "yes" : "no"}</p>
                 <p>Description: {scan.description}</p>
                 <p>Barcode: {scan.barcode}</p>

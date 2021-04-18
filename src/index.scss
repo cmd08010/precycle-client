@@ -16,6 +16,8 @@ h1 {
   color: #1A535C;
 }
 
+
+
 .admin {
   margin: auto;
   width: 100%;
@@ -33,6 +35,10 @@ h1 {
   margin: auto;
   width: 100%;
   padding: 20px;
+}
+
+.barcode {
+  margin: 50px;
 }
 
 .form-buttons {
@@ -72,8 +78,9 @@ h1 {
   color: #1A535C;
 }
 .toggle {
-  width: 100px;
-  height: 100px;
+  width: auto;
+  height: auto;
+  
 }
 
 .recycleable {

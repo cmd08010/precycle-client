@@ -38,7 +38,7 @@ function Barcode({ user, msgAlert, barcode, setBarcode, formData, setFormData}) 
       <h3>{msg}</h3>
       </div>
     }
-    { checked && <div>
+    { checked && <div className="barcode">
       <BarcodeScannerComponent
       width={500}
       height={500}

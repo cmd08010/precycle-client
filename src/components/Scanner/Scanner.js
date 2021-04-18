@@ -8,6 +8,7 @@ import Button from 'react-bootstrap/Button'
 import Spinner from 'react-bootstrap/Spinner'
 import Barcode from './Barcode'
 
+
 const Scanner = ({ user, msgAlert }) => {
   const [response, setResponse] = useState(undefined)
   const [barcode, setBarcode] = useState('Not Found')
@@ -50,6 +51,7 @@ const Scanner = ({ user, msgAlert }) => {
     } else {
       scanItemWithApi(user, formData)
       .then(res => {
+        console.log(res)
         setLoading(false)
         setNumberOfApiCalls(prevNum => prevNum-1)
         setResponse(res.data.item.products)
@@ -57,7 +59,7 @@ const Scanner = ({ user, msgAlert }) => {
       .catch(err => {
         console.log(err, "err")
         setLoading(false)
-        setMsg('Item Not found!')
+        setMsg('Item Not found! -Add the item')
       })
     }
   }
@@ -148,7 +150,7 @@ const Scanner = ({ user, msgAlert }) => {
       />
       </Form.Group>}
       { form === "barcode" &&
-      <Form.Group controlId="barcode">
+      <Form.Group controlId="barcode" className="barcode">
       <Form.Label>Scan your barcode below</Form.Label>
       <Barcode
       barcode={barcode}
@@ -179,6 +181,7 @@ const Scanner = ({ user, msgAlert }) => {
       {response && response.map(res => {
         return (<div className="response" key={response.indexOf(res)}>
         {res.recycleable ? <div><img src="/Recycle.jpeg" alt="yes" className="recycleable"/><p>{res.name} is Recycleable!</p></div> : <div><img src="/download.png"/><p>{res.name} is NOT recycleable.</p></div>}
+
         <h4>{res.name} is made out of {res.material}</h4>
         <Button
         type="submit"
