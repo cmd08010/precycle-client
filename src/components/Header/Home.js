@@ -25,13 +25,13 @@ const Home = ({ user, msgAlert }) => {
           <div className="header-5">
             <Link to="/sign-in">Sign-in</Link> or <Link to="sign-up">Sign-up</Link> to get started!
           </div>
-            <img src="/Recycle.jpeg" />
+            <img src="Recycle.jpeg" />
           </div>
         }
         { user && <div className="home-page">
           <div className="home-page">
           <div className="header-4">Welcome, {user.email}</div>
-            <img src="/Recycle.jpeg" />
+            <img src="Recycle.jpeg" />
           </div>
           </div>
         }
