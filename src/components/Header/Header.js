@@ -35,7 +35,7 @@ const Header = ({ user }) => {
     if (user.is_superuser) {
       return (
       <Navbar variant="dark" expand="md" className="navbar">
-        <Navbar.Brand href="#" className="navbar">
+        <Navbar.Brand href="#home" className="navbar">
           (p)recycle
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />

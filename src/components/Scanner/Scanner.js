@@ -191,7 +191,7 @@ const Scanner = ({ user, msgAlert }) => {
         </div>
       )
     })}
-    {msg && <div>{msg}</div>}
+    {msg && <div className="header-4">{msg}</div>}
     </div>
     </div>
     </div>
