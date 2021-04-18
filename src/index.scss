@@ -76,6 +76,11 @@ p {
 }
 
 
+span {
+  font-size: 1rem;
+  font-family: 'Potta One', cursive;
+}
+
 .home-page {
   display: flex;
   flex-direction: column;
@@ -160,7 +165,7 @@ Button {
 }
 
 .card-text {
-  font-size: 2px;
+  margin: 2px;
 }
 
 .card-button {

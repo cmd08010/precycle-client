@@ -83,10 +83,23 @@ export const deleteScan = (user, data) => {
   })
 }
 
-export const updateItem = (user, id, data) => {
-  console.log(id, "id in api")
+export const getItem = (user, id) => {
+  console.log(user, "my api data")
   return axios({
-    url: `${apiUrl}/items/`,
+    url: apiUrl + '/item/' + id,
+    method: 'GET',
+    // include an authorization header, that includes our user's token
+    // so the API knows who to sign out
+    headers: {
+      'Authorization': `Token ${user.token}`
+    }
+  })
+}
+
+export const updateItem = (user, data) => {
+  console.log(data, "id in api")
+  return axios({
+    url: `${apiUrl}/update-item/`,
     method: 'PATCH',
     headers: {
       'Authorization': `Token ${user.token}`

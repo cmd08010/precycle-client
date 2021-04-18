@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
-import { scanIndex, addItem } from '../../api/scan'
-import { getMaterials } from '../../api/material'
+import { updateItem, getItem } from '../../api/scan'
 
 import Form from 'react-bootstrap/Form'
 import FormFile from 'react-bootstrap/FormFile'
@@ -11,33 +10,31 @@ import Spinner from 'react-bootstrap/Spinner'
 import { Col } from 'react-bootstrap'
 import Barcode from '../Scanner/Barcode'
 
-const AddItem = ({ user, msgAlert }) => {
+const UpdateItem = ({ user, msgAlert, materials, match }) => {
   const [item, setItem] = useState({
     name: '',
     description: '',
     barcode: '',
     material: ''
   })
-  const [materials, setMaterials] = useState([])
   const [recycleable, setRecycleable] = useState(false)
 
-  useEffect(() => {
-    getMaterials(user)
-    .then(res => {
-      console.dir(res.data.materials)
-      setMaterials(res.data.materials)
-    })
-  },[])
 
+  useEffect(() => {
+    const id = match.params.id
+    console.log(id)
+    getItem(user, id)
+    .then(res => setItem(res.data.items[0]))
+  },[])
 
   const handleFormChange = event => {
     event.persist()
     if (event.target.name === "material") {
       const mat = materials.filter(material => material.name === event.target.value)
-      console.log(mat[0].id, "mat")
+      console.log(mat[0], "mat")
       setRecycleable(mat[0].recycleable)
       setItem(prevItem => {
-        const updatedField = { material: mat[0].id }
+        const updatedField = { material: mat[0].name }
         const editedItem = Object.assign({}, prevItem, updatedField)
         return editedItem
     })
@@ -50,10 +47,10 @@ const AddItem = ({ user, msgAlert }) => {
     }
   }
 
-  const addNewItem = event => {
+  const sendUpdateItem = event => {
     event.preventDefault()
     const data = {...item, recycleable}
-      addItem(user, data)
+      updateItem(user, data)
         .then(res => console.log(res))
         .then(() => msgAlert({
           heading: 'Add Item Success',
@@ -74,11 +71,11 @@ const AddItem = ({ user, msgAlert }) => {
     <div className="row">
       <div className="col-sm-10 col-md-8 mx-auto mt-5">
       <div className="bubble">
-        <div className="header-2">Check your product!</div>
+        <div className="header-2">Update your product!</div>
         </div>
-        <Form onSubmit={addNewItem}>
+        <Form onSubmit={sendUpdateItem}>
         <Form.Group controlId="name">
-            <Form.Label>Text</Form.Label>
+            <Form.Label>Name</Form.Label>
             <Form.Control
               type="text"
               name="name"
@@ -114,6 +111,7 @@ const AddItem = ({ user, msgAlert }) => {
                     name="material"
                     custom
                     onChange={handleFormChange}
+                    value={item.material}
                   >
                   <option> </option>
                   {materials.map(material => {
@@ -145,4 +143,4 @@ const AddItem = ({ user, msgAlert }) => {
   )
 }
 
-export default withRouter(AddItem)
+export default withRouter(UpdateItem)

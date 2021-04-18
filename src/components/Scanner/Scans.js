@@ -39,15 +39,13 @@ const deleteThisScan = (scan) => {
         {myScans.map(scan => {
             return (
                 <div key={scan.id}>
-                <Card style={{ width: '18rem' }}>
+                <Card style={{ width: '18rem', height: 'auto' }}>
                   <Card.Body>
                     <Card.Title><div className="header-5">Created at: {moment(scan.created_at).format('MM/DD/YYYY')}</div></Card.Title>
-                    <Card.Text>
-                      <p>{scan.name}</p>
-                      <p>Recyclable?: {scan.recycleable ? "yes" : "no"}</p>
-                      <p>Description: {scan.description}</p>
-                      <p>Barcode: {scan.barcode}</p>
-                    </Card.Text>
+                      <Card.Text>{scan.name}</Card.Text>
+                      <Card.Text>Recyclable?: {scan.recycleable ? "yes" : "no"}</Card.Text>
+                      <Card.Text>Description: {scan.description}</Card.Text>
+                      <Card.Text>Barcode: {scan.barcode}</Card.Text>
                     <Button
                     type="submit"
                     variant="outline-secondary"
@@ -73,13 +71,11 @@ const deleteThisScan = (scan) => {
                       <Card style={{ width: '18rem' }}>
                         <Card.Body>
                           <Card.Title><div className="header-5">Created at: {moment(scan.created_at).format('MM/DD/YYYY')}</div></Card.Title>
-                          <Card.Text>
-                            <p>{scan.name}</p>
-                            <p>Owner: {scan.owner}</p>
-                            <p>Recyclable?: {scan.recycleable ? "yes" : "no"}</p>
-                            <p>Description: {scan.description}</p>
-                            <p>Barcode: {scan.barcode}</p>
-                          </Card.Text>
+                            <Card.Text>{scan.name}</Card.Text>
+                            <Card.Text>Owner: {scan.owner}</Card.Text>
+                            <Card.Text>Recyclable?: {scan.recycleable ? "yes" : "no"}</Card.Text>
+                            <Card.Text>Description: {scan.description}</Card.Text>
+                            <Card.Text>Barcode: {scan.barcode}</Card.Text>
                           <Button
                           type="submit"
                           variant="outline-secondary"

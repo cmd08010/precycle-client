@@ -34,7 +34,7 @@ const Scanner = ({ user, msgAlert }) => {
     if (!api) {
       scanItem(user, formData)
       .then(res => {
-        console.log(res.status, "my response")
+        console.log(res, "my response")
         setLoading(false)
         setResponse(res.data.items)
         setMsg('')
@@ -52,10 +52,26 @@ const Scanner = ({ user, msgAlert }) => {
       scanItemWithApi(user, formData)
       .then(res => {
         console.log(res)
+        const data = res.data.data
+        setResponse([{
+          name: data[0],
+          description: data[1],
+          barcode: data[2],
+          recycleable: data[3],
+          owner: data[4]
+        }])
         setLoading(false)
         setNumberOfApiCalls(prevNum => prevNum-1)
-        setResponse(res.data.item.products)
+      //  setResponse(res.data.item.products)
       })
+      .then(() =>  {
+        setMsg('')
+        msgAlert({
+        heading: 'Found Item Success',
+        message: 'Found the item!',
+        variant: 'success'
+      })
+    })
       .catch(err => {
         console.log(err, "err")
         setLoading(false)

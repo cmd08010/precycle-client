@@ -25,10 +25,15 @@ const AddMaterial = ({ user, msgAlert }) => {
     const data = {name, recycleable}
       addMaterial(user, data)
         .then(res => clearInput())
+        .then(() => msgAlert({
+          heading: 'Add MAterial Success',
+          message: 'Added New Material',
+          variant: 'success'
+        }))
         .catch(error => {
           msgAlert({
-            heading: 'Failed to Upload Picture ',
-            message: 'Could not upload pictures with error' + error.message,
+            heading: 'Failed to add material: ' + error.message,
+            message: 'Couldnt add material',
             variant: 'danger'
           })
         })
