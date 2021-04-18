@@ -69,7 +69,7 @@ const AddItem = ({ user, msgAlert }) => {
     <div className="row">
       <div className="col-sm-10 col-md-8 mx-auto mt-5">
       <div className="bubble">
-        <h2>Check your product!</h2>
+        <div className="header-2">Check your product!</div>
         </div>
         <Form onSubmit={addNewItem}>
         <Form.Group controlId="name">
@@ -129,7 +129,6 @@ const AddItem = ({ user, msgAlert }) => {
                 </Form.Group>
             <Button
               type="submit"
-              className="bubble"
             >
         Submit
         </Button>

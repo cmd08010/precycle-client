@@ -22,7 +22,10 @@ const changeUserStatus = (id) => {
   console.log(id,"my user")
   setActive(!user.is_active)
   deactivateAUser(user, id.aUser.id, active)
-  .then(res => setRerender(Date.now()+user.id))
+  .then(res => {
+    console.log(res)
+    console.log(user.is_active, "user active")
+    setRerender(Date.now()+user.id)})
 
 }
 
@@ -30,8 +33,8 @@ const changeUserStatus = (id) => {
     <div className="container">
     <div className="row">
       <div className="col-sm-10 col-md-8 mx-auto mt-5">
-      <div className="bubble">
-        <h2>Check users</h2>
+      <div className="admin-panel">
+        <div className="header-2">Check users</div>
         {users.map(aUser => {
           return (
             <div key={aUser.id} className={aUser.is_superuser ? "admin" : "user"}>
@@ -42,7 +45,6 @@ const changeUserStatus = (id) => {
             <Button
               type="submit"
               variant="outline-secondary"
-              className="bubble"
               onClick={() => changeUserStatus({aUser})}
             >
             {aUser.is_active ? "Deactivate" : "Activate"} User

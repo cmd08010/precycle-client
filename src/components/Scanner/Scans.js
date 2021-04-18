@@ -34,44 +34,47 @@ const deleteThisScan = (scan) => {
     <div className="row">
       <div className="col-sm-10 col-md-8 mx-auto mt-5">
       <div className="bubble">
-        <h2>Get My Scans</h2>
+        <div className="header-2">Get My Scans</div>
         {myScans.map(scan => {
             return (
                 <div key={scan.id}>
-                <h3>Name : {scan.name}</h3>
+                <div className="header-4">Created at: {moment(scan.created_at).format('MM/DD/YYYY')}</div>
+                <p>{scan.name}</p>
                 <p>Owner: {scan.owner}</p>
-                <p>Created at: {moment(scan.created_at).format('MM/DD/YYYY')}</p>
                 <p>Recyclable?: {scan.recycleable ? "yes" : "no"}</p>
                 <p>Description: {scan.description}</p>
                 <p>Barcode: {scan.barcode}</p>
                 <Button
                   type="submit"
-                  className="bubble"
+                  variant="outline-secondary"
                   onClick={()=> deleteThisScan(scan)}
                   >
                   Delete
                 </Button>
+                  <hr />
                 </div>
               )
             })}
             <br/>
             {user.is_superuser && <div>
-              <h2>All Scans</h2>
+                <div className="header-2">All Scans</div>
             {scans.map(scan => {
                 return (
                     <div key={scan.id}>
-                      <h3>Name : {scan.name}</h3>
+                    <div className="header-4">Created at: {moment(scan.created_at).format('MM/DD/YYYY')}</div>
+                    <p>{scan.name}</p>
                       <p>Owner: {scan.owner}</p>
                       <p>Recyclable?: {scan.recycleable ? "yes" : "no"}</p>
                       <p>Description: {scan.description}</p>
                       <p>Barcode: {scan.barcode}</p>
                       <Button
                         type="submit"
-                        className="bubble"
+                        variant="outline-secondary"
                         onClick={()=> deleteThisScan(scan)}
                         >
                         Delete
                       </Button>
+                      <hr />
                     </div>
                   )
                 })}

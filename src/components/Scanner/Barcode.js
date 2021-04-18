@@ -19,10 +19,9 @@ function Barcode({ user, msgAlert, barcode, setBarcode, formData, setFormData}) 
       if(barcode === 'Not Found') {
         setMsg("Please try again")
       }
-    }, 3700)
+    }, 4000)
   }
 
-  console.log("in barcode component")
 
   return (
     <div className="toggle">
@@ -56,7 +55,7 @@ function Barcode({ user, msgAlert, barcode, setBarcode, formData, setFormData}) 
       />
       </div>
     }
-    { barcode !== 'Not Found' && <p> Barcode: {barcode}</p>}
+    { barcode !== 'Not Found' && <p className="barcode-scan"> Barcode: {barcode}</p>}
     </div>
   )
 }

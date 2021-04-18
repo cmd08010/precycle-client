@@ -17,12 +17,12 @@ useEffect(() => {
     <div className="container">
     <div className="row">
       <div className="col-sm-10 col-md-8 mx-auto mt-5">
-      <div className="bubble">
-        <h2>Get Items</h2>
+      <div className="admin-panel">
+        <div className="header-2">Get Items</div>
         {items.map(item => {
           return (
             <div key={item.id} className={item.recycleable ? "recycleable" : "not-rec"}>
-            <h3>Name : {item.name}</h3>
+            <div className="header-4">{item.name}</div>
             <p>Owner: {item.owner}</p>
             <p>Recyclable?: {item.recycleable ? "yes" : "no"}</p>
             <p>Description: {item.description}</p>

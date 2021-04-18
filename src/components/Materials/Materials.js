@@ -20,7 +20,7 @@ useEffect(() => {
     <div className="row">
       <div className="col-sm-10 col-md-8 mx-auto mt-5">
       <div className="bubble">
-        <h2>Get Materials</h2>
+        <div className="header-2">Get Materials</div>
         {materials.map(material => {
           return (
             <div className="admin" key={material.id}>

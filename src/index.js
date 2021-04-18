@@ -4,6 +4,7 @@ import './index.scss'
 
 import App from './App'
 import { HashRouter } from 'react-router-dom'
+import 'semantic-ui-css/semantic.min.css'
 
 const appJsx = (
   <HashRouter>

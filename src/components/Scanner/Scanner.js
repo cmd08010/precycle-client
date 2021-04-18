@@ -98,8 +98,8 @@ const Scanner = ({ user, msgAlert }) => {
       <div className="container">
         <div className="row">
           <div className="col-sm-10 col-md-8 mx-auto mt-5">
-          <div className="bubble">
-      <h2>Check your product!</h2>
+          <div>
+      <div className="header-2">Check your product!</div>
       </div>
       <div className="form-buttons">
       <Button
@@ -162,7 +162,6 @@ const Scanner = ({ user, msgAlert }) => {
     }
     { form && <Button
       type="submit"
-      className="bubble"
       variant="outline-secondary"
       >
       Submit
@@ -174,7 +173,6 @@ const Scanner = ({ user, msgAlert }) => {
       onlabel='YES'
       offlabel='NO'
       onChange={useApi}
-      className="api-button"
       />
       </div>}
       {loading && <Spinner animation="border"/>}
@@ -185,7 +183,6 @@ const Scanner = ({ user, msgAlert }) => {
         <h4>{res.name} is made out of {res.material}</h4>
         <Button
         type="submit"
-        className="bubble"
         variant="outline-secondary"
         onClick={postSavedScan}
         >

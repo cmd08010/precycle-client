@@ -49,8 +49,8 @@ class SignIn extends Component {
 
     return (
       <div className="row">
-        <div className="col-sm-10 col-md-8 mx-auto mt-5">
-          <h3>Sign In</h3>
+        <div className="col-sm-10 col-md-8 mx-auto mt-5 auth-forms">
+          <div className="header-3">Sign In</div>
           <Form onSubmit={this.onSignIn}>
             <Form.Group controlId="email">
               <Form.Label>Email address</Form.Label>
@@ -78,7 +78,7 @@ class SignIn extends Component {
               variant="primary"
               type="submit"
             >
-              Submit
+              Sign In
             </Button>
           </Form>
         </div>
