@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button'
 import Image from 'react-bootstrap/Image'
 import Spinner from 'react-bootstrap/Spinner'
 import { Col } from 'react-bootstrap'
-import Barcode from './Barcode'
+import Barcode from '../Scanner/Barcode'
 
 const AddItem = ({ user, msgAlert }) => {
   const [item, setItem] = useState({
@@ -18,8 +18,8 @@ const AddItem = ({ user, msgAlert }) => {
     barcode: '',
     material: ''
   })
-  const [recycleable, setRecycleable] = useState(false)
   const [materials, setMaterials] = useState([])
+  const [recycleable, setRecycleable] = useState(false)
 
   useEffect(() => {
     getMaterials(user)
@@ -29,15 +29,25 @@ const AddItem = ({ user, msgAlert }) => {
     })
   },[])
 
-  const handleRecycleableChange = () => setRecycleable(!recycleable)
 
   const handleFormChange = event => {
     event.persist()
-    setItem(prevItem => {
-      const updatedField = { [event.target.name]: event.target.value }
-      const editedItem = Object.assign({}, prevItem, updatedField)
-      return editedItem
+    if (event.target.name === "material") {
+      const mat = materials.filter(material => material.name === event.target.value)
+      console.log(mat[0].id, "mat")
+      setRecycleable(mat[0].recycleable)
+      setItem(prevItem => {
+        const updatedField = { material: mat[0].id }
+        const editedItem = Object.assign({}, prevItem, updatedField)
+        return editedItem
     })
+    } else {
+      setItem(prevItem => {
+        const updatedField = { [event.target.name]: event.target.value }
+        const editedItem = Object.assign({}, prevItem, updatedField)
+        return editedItem
+      })
+    }
   }
 
   const addNewItem = event => {
@@ -72,15 +82,16 @@ const AddItem = ({ user, msgAlert }) => {
               onChange={handleFormChange}
             />
           </Form.Group>
-          <Form.Group controlId="recycleable">
-              <Form.Label>recycleable</Form.Label>
-              <Form.Control
-                type="checkbox"
-                name="recycleable"
-                value={recycleable}
-                onChange={handleRecycleableChange}
-              />
-            </Form.Group>
+          {// <Form.Group controlId="recycleable">
+          //     <Form.Label>recycleable</Form.Label>
+          //     <Form.Control
+          //       type="checkbox"
+          //       name="recycleable"
+          //       value={recycleable}
+          //       onChange={handleRecycleableChange}
+          //     />
+          //   </Form.Group>
+        }
             <Form.Group controlId="description">
                 <Form.Label>Description</Form.Label>
                 <Form.Control

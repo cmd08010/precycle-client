@@ -23,7 +23,7 @@ useEffect(() => {
         <h2>Get Materials</h2>
         {materials.map(material => {
           return (
-            <div className="admin">
+            <div className="admin" key={material.id}>
             <p>{material.name}</p>
             <p>Recyclable: {material.recycleable ? "YES" : "NO"}</p>
             </div>

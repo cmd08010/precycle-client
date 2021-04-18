@@ -13,7 +13,10 @@ const Scanner = ({ user, msgAlert }) => {
   const [barcode, setBarcode] = useState('Not Found')
   const [api, setApi] = useState(false)
   const [msg, setMsg] = useState('')
-  const [formData, setFormData] = useState({})
+  const [formData, setFormData] = useState({
+    name: '',
+    barcode: ''
+  })
   const [numberOfApiCalls, setNumberOfApiCalls ] = useState(40)
   const [form, setForm] = useState(null)
   const [loading, setLoading] = useState(false)
@@ -34,6 +37,10 @@ const Scanner = ({ user, msgAlert }) => {
         setLoading(false)
         setResponse(res.data.items)
         setMsg('')
+        setFormData({
+          name: '',
+          barcode: ''
+        })
       })
       .catch(err => {
         console.log(err, "err")
@@ -53,21 +60,10 @@ const Scanner = ({ user, msgAlert }) => {
         setMsg('Item Not found!')
       })
     }
-    // .then(() => msgAlert({
-    //     heading: 'Scan Successfully Uploaded',
-    //     message: 'Click to add more pictures to your account!',
-    //     variant: 'success'
-    //   }))
-    // .catch(error => {
-    //   msgAlert({
-    //     heading: 'Failed to find scan ',
-    //     message: 'Could not upload pictures with error' + error.message,
-    //     variant: 'danger'
-    //   })
-    // })
   }
 
   const postSavedScan = (event) => {
+    console.log(response)
     addScan(user, response)
     .then(res => console.log(res))
     .then(() => msgAlert({
@@ -87,6 +83,8 @@ const Scanner = ({ user, msgAlert }) => {
 
   const showCorrectForm = (event) => {
     setForm(event.target.name)
+    setResponse('')
+    setMsg('')
   }
 
   const useApi = (event) => {
@@ -106,7 +104,6 @@ const Scanner = ({ user, msgAlert }) => {
       variant="link"
       type="button"
       name="barcode"
-      className="bubble"
       onClick={showCorrectForm}
       >
       Barcode Scan
@@ -115,16 +112,14 @@ const Scanner = ({ user, msgAlert }) => {
       variant="link"
       type="button"
       name="text"
-      className="bubble"
       onClick={showCorrectForm}
       >
-      text
+      Item Name
       </Button>
       <Button
       variant="link"
       type="button"
       name="barcode-number"
-      className="bubble"
       onClick={showCorrectForm}
       >
       Barcode Number
@@ -166,31 +161,32 @@ const Scanner = ({ user, msgAlert }) => {
     { form && <Button
       type="submit"
       className="bubble"
+      variant="outline-secondary"
       >
       Submit
       </Button>}
       </Form>
       </div>
-      {user.is_superuser && <div className="admin"><br/><br/>USE API?? {numberOfApiCalls} <BootstrapSwitchButton
+      {user.is_superuser && <div className="admin-api">Use Api <BootstrapSwitchButton
       checked={api}
-      onlabel='Api'
-      offlabel='NO API'
+      onlabel='YES'
+      offlabel='NO'
       onChange={useApi}
+      className="api-button"
       />
       </div>}
       {loading && <Spinner animation="border"/>}
       {response && response.map(res => {
-        return (<div key={response.indexOf(res)}>
-        <h3>{res.barcode_number}</h3>
-        <h3>{res.name}</h3>
-        <h4>{res.description}</h4>
-        {res.recycleable ? <img src="https://static1.bigstockphoto.com/5/0/9/large1500/90589313.jpg" className="recycleable"/> : <img src="https://previews.123rf.com/images/kittichais/kittichais1511/kittichais151100074/47415154-no-sad-icon.jpg"/>}
+        return (<div className="response" key={response.indexOf(res)}>
+        {res.recycleable ? <div><img src="/Recycle.jpeg" alt="yes" className="recycleable"/><p>{res.name} is Recycleable!</p></div> : <div><img src="/download.png"/><p>{res.name} is NOT recycleable.</p></div>}
+        <h4>{res.name} is made out of {res.material}</h4>
         <Button
         type="submit"
         className="bubble"
+        variant="outline-secondary"
         onClick={postSavedScan}
         >
-        Save
+        Save My Results!
         </Button>
         </div>
       )

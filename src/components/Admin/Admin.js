@@ -4,6 +4,13 @@ import { withRouter } from 'react-router-dom'
 import { scanIndex, addItem } from '../../api/scan'
 import { getUsersForAdmin, deactivateAUser } from '../../api/auth'
 
+import AuthenticatedRoute from '../AuthenticatedRoute/AuthenticatedRoute'
+import Users from '../Admin/Users'
+import AddMaterial from '../Materials/AddMaterial'
+import Materials from '../Materials/Materials'
+import AddItem from '../Admin/AddItem'
+import GetItems from '../Admin/GetItems'
+
 import Button from 'react-bootstrap/Button'
 import Image from 'react-bootstrap/Image'
 
@@ -29,32 +36,34 @@ const changeUserStatus = (id) => {
   return (
     <div className="container">
     <div className="row">
-      <div className="col-sm-10 col-md-8 mx-auto mt-5">
-      <div className="bubble">
-        <h2>Check users</h2>
-        {users.map(aUser => {
-          return (
-            <div key={aUser.id} className={aUser.is_superuser ? "admin" : "user"}>
-            <p>Email: {aUser.email}</p>
-            <p>id: {aUser.id}</p>
-            <p>Role: {aUser.is_superuser ? "admin" : "user"} </p>
-            <p>Active?: {aUser.is_active ? "yes" : "no"}</p>
-            <Button
-              type="submit"
-              variant="outline-secondary"
-              className="bubble"
-              onClick={() => changeUserStatus({aUser})}
-            >
-            {aUser.is_active ? "Deactivate" : "Activate"} User
-            </Button>
+      <div className="admin-panel">
+        <h1>Admin Panel</h1>
+        <div className="links">
+          <Link to="/admin/users" className="links">Users</Link>
+          <Link to="/admin/add-item" className="links">Add Items</Link>
+          <Link to="/admin/get-items" className="links">Get Items</Link>
+          <Link to="/admin/add-material" className="links">Add Material</Link>
+          <Link to="/admin/materials" className="links">Get Materials</Link>
+          </div>
+          <AuthenticatedRoute user={user} path='/admin/add-item' render={() => (
+             <div>{user.is_superuser && <AddItem msgAlert={this.msgAlert} user={user} />}</div>
+           )} />
+           <AuthenticatedRoute user={user} path='/admin/get-items' render={() => (
+              <div>{user.is_superuser && <GetItems msgAlert={this.msgAlert} user={user} />}</div>
+            )} />
+             <AuthenticatedRoute user={user} path='/admin/users' render={() => (
+                <div>{user.is_superuser && <Users msgAlert={this.msgAlert} user={user} />}</div>
+              )} />
+             <AuthenticatedRoute user={user} path='/admin/add-material' render={() => (
+                <div>{user.is_superuser && <AddMaterial msgAlert={this.msgAlert} user={user} />}</div>
+              )} />
+              <AuthenticatedRoute user={user} path='/admin/materials' render={() => (
+                 <div>{user.is_superuser && <Materials msgAlert={this.msgAlert} user={user} />}</div>
+               )} />
             <hr/>
             </div>
-          )
-        })}
         </div>
-      </div>
     </div>
-  </div>
   )
 }
 

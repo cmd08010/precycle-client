@@ -62,6 +62,7 @@ export const getItems = (user) => {
 }
 
 export const addItem = (user, data) => {
+    console.log(data, "my api data")
   return axios({
     method: 'POST',
     url: apiUrl + '/items/',

@@ -4,7 +4,8 @@ import Navbar from 'react-bootstrap/Navbar'
 
 const authenticatedOptions = (
   <Fragment>
-    <Nav.Link href="#get-scans">Get All Scans</Nav.Link>
+    <Nav.Link href="#scan">Scan an Item</Nav.Link>
+    <Nav.Link href="#get-scans">My Scans</Nav.Link>
     <Nav.Link href="#change-password">Change Password</Nav.Link>
     <Nav.Link href="#sign-out">Sign Out</Nav.Link>
   </Fragment>
@@ -19,11 +20,7 @@ const unauthenticatedOptions = (
 
 const superUserOptions = (
   <Fragment>
-    <Nav.Link href="#users">Users</Nav.Link>
-    <Nav.Link href="#add-item">Add Items</Nav.Link>
-    <Nav.Link href="#get-items">Get Items</Nav.Link>
-    <Nav.Link href="#add-material">Add Material</Nav.Link>
-    <Nav.Link href="#materials">Get Materials</Nav.Link>
+    <Nav.Link href="#admin">Admin</Nav.Link>
   </Fragment>
 )
 
@@ -45,11 +42,8 @@ const Header = ({ user }) => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto">
             { user && <span className="navbar-text mr-2">Welcome, {user.email}, You are an admin.</span>}
-            <hr/>
-            Admin Options:
-            { superUserOptions }
-            <hr/>
             { alwaysOptions }
+            { superUserOptions }
             { authenticatedOptions }
           </Nav>
         </Navbar.Collapse>

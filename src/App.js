@@ -10,12 +10,11 @@ import SignIn from './components/SignIn/SignIn'
 import SignOut from './components/SignOut/SignOut'
 import Scanner from './components/Scanner/Scanner'
 import Barcode from './components/Scanner/Barcode'
-import AddItem from './components/Scanner/AddItem'
-import GetItems from './components/Scanner/GetItems'
+
+// admin
 import Scans from './components/Scanner/Scans'
 import Admin from './components/Admin/Admin'
-import AddMaterial from './components/Materials/AddMaterial'
-import Materials from './components/Materials/Materials'
+
 import NotFound from './components/NotFound'
 import ChangePassword from './components/ChangePassword/ChangePassword'
 
@@ -81,27 +80,18 @@ class App extends Component {
           <AuthenticatedRoute user={user} exact path='/' render={() => (
             <Scanner msgAlert={this.msgAlert} user={user} />
           )} />
+          <AuthenticatedRoute user={user} exact path='/scan' render={() => (
+            <Scanner msgAlert={this.msgAlert} user={user} />
+          )} />
           <AuthenticatedRoute user={user} path='/barcode' render={() => (
             <Barcode msgAlert={this.msgAlert} user={user} />
           )} />
           <AuthenticatedRoute user={user} path='/get-scans' render={() => (
             <Scans msgAlert={this.msgAlert} user={user} />
           )} />
-         <AuthenticatedRoute user={user} path='/add-item' render={() => (
-            <div>{user.is_superuser && <AddItem msgAlert={this.msgAlert} user={user} />}</div>
+          <AuthenticatedRoute user={user} path='/admin' render={() => (
+            <div>{user.is_superuser && <Admin msgAlert={this.msgAlert} user={user} />}</div>
           )} />
-          <AuthenticatedRoute user={user} path='/get-items' render={() => (
-             <div>{user.is_superuser && <GetItems msgAlert={this.msgAlert} user={user} />}</div>
-           )} />
-           <AuthenticatedRoute user={user} path='/users' render={() => (
-              <div>{user.is_superuser && <Admin msgAlert={this.msgAlert} user={user} />}</div>
-            )} />
-            <AuthenticatedRoute user={user} path='/add-material' render={() => (
-               <div>{user.is_superuser && <AddMaterial msgAlert={this.msgAlert} user={user} />}</div>
-             )} />
-             <AuthenticatedRoute user={user} path='/materials' render={() => (
-                <div>{user.is_superuser && <Materials msgAlert={this.msgAlert} user={user} />}</div>
-              )} />
           </Switch>
         </main>
       </Fragment>
