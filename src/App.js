@@ -82,8 +82,8 @@ class App extends Component {
           <AuthenticatedRoute user={user} path='/change-password' render={() => (
             <ChangePassword msgAlert={this.msgAlert} user={user} />
           )} />
-          <AuthenticatedRoute user={user} barcode={barcode} setBarcode={this.setBarcode} path='/home' render={() => (
-            <Scanner msgAlert={this.msgAlert} user={user} barcode={barcode} setBarcode={this.setBarcode} />
+          <AuthenticatedRoute user={user} path='/home' render={() => (
+            <Home msgAlert={this.msgAlert} user={user} />
           )} />
           <AuthenticatedRoute user={user} barcode={barcode} setBarcode={this.setBarcode} exact path='/' render={() => (
             <Scanner msgAlert={this.msgAlert} user={user}  barcode={barcode} setBarcode={this.setBarcode}/>

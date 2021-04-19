@@ -15,8 +15,8 @@ body {
   font-family: 'Pacifico', cursive;
   width: auto;
   height: auto;
-  border-bottom: 3px solid $quarternary ;
-  border-top: 3px solid $quarternary ;
+  border-bottom: 3px solid $quarternary;
+  border-top: 3px solid $quarternary;
   border-width: 1rem;
   padding: 20px;
   font-size: 3rem;
@@ -27,23 +27,24 @@ body {
 }
 
 .header-2 {
-  font-family: 'Pacifico', cursive;
+  font-family: 'Bungee Shade';
   white-space: nowrap;
-  font-size: 3rem;
-  border-bottom: 3px solid $quarternary ;
-  border-top: 3px solid $quarternary ;
+  font-size: 2rem;
+  border-bottom: 2px solid $quarternary;
+  border-top: 2px solid $quarternary;
   border-width: 1rem;
   padding: 30px;
   text-align: center;
-  color: $quinary;
+  color: $tertiary;
+  background-color: $quinary;
 }
 
 .header-3 {
   font-family: 'Bungee Shade', cursive;
   white-space: normal;
   font-size: 3rem;
-  border-bottom: 3px solid $quarternary ;
-  border-top: 3px solid $quarternary ;
+  border-bottom: 3px solid $quarternary;
+  border-top: 3px solid $quarternary;
   border-width: 1rem;
   padding: 20px;
   margin: 30px;
@@ -52,7 +53,7 @@ body {
   color: $quinary;
 }
 
-.header-4{
+.header-4 {
   font-family: 'Potta One', cursive;
   width: auto;
   height: auto;
@@ -63,7 +64,7 @@ body {
   color: $quinary;
 }
 
-.header-5{
+.header-5 {
   font-family: 'Potta One', cursive;
   width: auto;
   height: auto;
@@ -77,6 +78,7 @@ Nav {
   color: $tertiary;
   font-family: 'Train One', cursive;
 }
+
 h1 {
   font-family: 'Pacifico', cursive;
   border: 3px solid $quarternary;
@@ -96,7 +98,6 @@ p {
   font-size: 1rem;
   font-family: 'Potta One', cursive;
 }
-
 
 span {
   font-size: 1rem;
@@ -147,33 +148,35 @@ span {
   color: $quinary;
 }
 
-
 .auth-forms {
   font-family: 'Potta One', cursive;
   font-size: 1rem;
+  color: $quinary;
 }
 
 .barcode {
   margin: 20px;
 }
+
 .barcode-scan {
   margin: 50px;
   font-size: 2rem;
   font-family: 'Libre Barcode 128 Text', cursive;
 }
+
 button {
   width: 10%;
 }
 
 .btn {
   font-family: 'Potta One', cursive;
-  font-size: 1.5rem;
-  width: 25%;
+  font-size: 1rem;
+  width: 35%;
   color: $quarternary;
 }
 
 Button {
-  width: 20%
+  width: 20%;
 }
 
 .cards {
@@ -191,7 +194,7 @@ Button {
 }
 
 .card-button {
-  width: 50%
+  width: 50%;
 }
 
 .form-buttons {
@@ -203,12 +206,13 @@ Button {
   font-size: 1rem;
 }
 
-.admin-panel{
+.admin-panel {
   font-family: 'Bungee Shade', cursive;
   display: flex;
   flex-direction: column;
   margin: auto;
   text-align: center;
+  color: $quinary;
   width: 100%;
   padding: 20px;
 }
@@ -229,13 +233,12 @@ form {
   align-items: center;
 }
 
-
 .form-group {
   font-family: 'vast shadow', cursive;
   width: 75%;
 }
 
-.navbar{
+.navbar {
   background-color: $quinary;
   color: #E6E8E2;
 }
@@ -256,13 +259,14 @@ form {
 
 .links-container {
   display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 20px;
 }
+
 .toggle {
   width: auto;
   height: auto;
-
 }
 
 .recycleable {
@@ -281,12 +285,18 @@ img {
   height: 200px;
   width: 250px;
 }
+
 .response {
   margin: 15px;
-
 }
-.not-recycleable{
+
+.not-recycleable {
   color: red;
+}
+
+.home-page-message {
+  flex-direction: row;
+  color: $quinary;
 }
 
 .user {

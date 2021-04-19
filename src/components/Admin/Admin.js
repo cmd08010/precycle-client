@@ -17,7 +17,7 @@ import { getMaterials } from '../../api/material'
 import Button from 'react-bootstrap/Button'
 import Image from 'react-bootstrap/Image'
 
-const Admin = ({ user, msgAlert, barcode, setBarcode }) => {
+const Admin = ({ user, msgAlert, barcode, setBarcode, location }) => {
   const [rerender, setRerender] = useState('')
   const [item, setItem] = useState({
     name: '',
@@ -36,6 +36,11 @@ useEffect(() => {
     console.dir(res.data.materials)
     setMaterials(res.data.materials)
   })
+  .then(() => msgAlert({
+    heading: 'Admin Panel',
+    message: 'Admins have access to a suite of tools. Admins can view all items in the database in addition to adding, deleting and updating items. Admins can also add materials, see all scans including delete scans, view all users and deactivate and activate user accounts.',
+    variant: 'success'
+  }))
 }, [rerender])
 
 
@@ -52,6 +57,9 @@ useEffect(() => {
           <Link to="/admin/add-material" className="links">Add Material</Link>
           <Link to="/admin/materials" className="links">Get Materials</Link>
           </div>
+          {location.pathname === "/admin" && <div className="auth-forms">
+          Admins have access to a suite of tools. Admins can view all items in the database in addition to adding, deleting and updating items. Admins can also add materials, see all scans including delete scans, view all users and deactivate and activate user accounts.
+          </div>}
           <AuthenticatedRoute user={user} barcode={barcode} setBarcode={setBarcode} path='/admin/add-item' render={() => (
              <div>{user.is_superuser && <AddItem msgAlert={msgAlert} user={user} barcode={barcode} setBarcode={setBarcode} />}</div>
            )} />

@@ -19,14 +19,13 @@ useEffect(() => {
 }, [rerender])
 
 const changeUserStatus = (id) => {
-  console.log(id,"my user")
-  setActive(!user.is_active)
-  deactivateAUser(user, id.aUser.id, active)
+  setActive(!id.is_active)
+  console.log(id.is_active, "user active before api call")
+  deactivateAUser(user, id.id, active)
   .then(res => {
-    console.log(res)
-    console.log(user.is_active, "user active")
-    setRerender(Date.now()+user.id)})
-
+    setUsers(res.data.users)
+    setRerender(Date.now()+id.id)
+  })
 }
 
   return (
@@ -36,23 +35,24 @@ const changeUserStatus = (id) => {
       <div className="admin-panel">
         <div className="header-2">Check users</div>
         {users.map(aUser => {
-          return (
-            <div key={aUser.id} className={aUser.is_superuser ? "admin" : "user"}>
-            <p>Email: {aUser.email}</p>
-            <p>id: {aUser.id}</p>
-            <p>Role: {aUser.is_superuser ? "admin" : "user"} </p>
-            <p>Active?: {aUser.is_active ? "yes" : "no"}</p>
-            <Button
-              type="submit"
-              variant="outline-secondary"
-              onClick={() => changeUserStatus({aUser})}
-            >
-            {aUser.is_active ? "Deactivate" : "Activate"} User
-            </Button>
-            <hr/>
-            </div>
-          )
-        })}
+            return (
+              <div key={aUser.id} className={aUser.is_superuser ? "admin" : "user"}>
+              <p>Email: {aUser.email}</p>
+              <p>id: {aUser.id}</p>
+              <p>Role: {aUser.is_superuser ? "admin" : "user"} </p>
+              <p>Active?: {aUser.is_active ? "yes" : "no"}</p>
+              { aUser.email !== user.email && <Button
+                type="submit"
+                variant="outline-secondary"
+                onClick={() => changeUserStatus(aUser)}
+              >
+              {aUser.is_active ? "Deactivate " : "Activate "} User
+              </Button>}
+              <hr/>
+              </div>
+            )
+          })}
+
         </div>
       </div>
     </div>
