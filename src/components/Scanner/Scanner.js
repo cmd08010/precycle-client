@@ -194,7 +194,7 @@ const Scanner = ({ user, msgAlert, barcode, setBarcode }) => {
       {loading && <Spinner animation="border"/>}
       {response && response.map(res => {
         return (<div className="response" key={response.indexOf(res)}>
-        {res.recycleable ? <div><img src="/Recycle.jpeg" alt="yes" className="recycleable"/><p>{res.name} is Recycleable!</p></div> : <div><img src="/download.png"/><p>{res.name} is NOT recycleable.</p></div>}
+        {res.recycleable ? <div><img src="Recycle.jpeg" alt="yes" className="recycleable"/><p>{res.name} is Recycleable!</p></div> : <div><img src="/download.png"/><p>{res.name} is NOT recycleable.</p></div>}
 
         <h4>{res.name} is made out of {res.material}</h4>
         <Button
