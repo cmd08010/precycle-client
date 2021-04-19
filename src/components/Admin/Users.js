@@ -9,7 +9,7 @@ import Image from 'react-bootstrap/Image'
 
 const Users = ({ user, msgAlert }) => {
   const [users, setUsers] = useState([])
-  const [active, setActive] = useState(true)
+  const [active, setActive] = useState()
   const [rerender, setRerender] = useState('')
 
 useEffect(() => {

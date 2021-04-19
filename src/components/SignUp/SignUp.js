@@ -6,6 +6,7 @@ import messages from '../AutoDismissAlert/messages'
 
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import Spinner from 'react-bootstrap/Spinner'
 
 class SignUp extends Component {
   constructor (props) {
@@ -14,7 +15,8 @@ class SignUp extends Component {
     this.state = {
       email: '',
       password: '',
-      passwordConfirmation: ''
+      passwordConfirmation: '',
+      loading: false
     }
   }
 
@@ -29,6 +31,10 @@ class SignUp extends Component {
 
     signUp(this.state)
       .then(() => signIn(this.state))
+      .then(res => {
+        this.setState({ loading: true })
+        return res
+      })
       .then(res => setUser(res.data.user))
       .then(() => msgAlert({
         heading: 'Sign Up Success',
@@ -97,6 +103,7 @@ class SignUp extends Component {
               Submit
             </Button>
           </Form>
+          {this.state.loading && <Spinner animation="border"/>}
         </div>
       </div>
     )
