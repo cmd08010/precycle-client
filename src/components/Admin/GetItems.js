@@ -15,7 +15,7 @@ const GetItems = ({ user, msgAlert }) => {
   const [data, setData] = useState("")
   const [materials, setMaterials] = useState([])
   const [recycleable, setRecycleable] = useState(false)
-  const [item, setItem] = useState({
+  const [itema, setItema] = useState({
     name: '',
     description: '',
     barcode: '',
@@ -32,7 +32,7 @@ useEffect(() => {
       setMaterials(res.data.materials)
     })
   })
-}, [])
+}, [itema])
 
 const handleFormChange = event => {
   event.persist()
@@ -40,13 +40,13 @@ const handleFormChange = event => {
     const mat = materials.filter(material => material.name === event.target.value)
     console.log(mat[0].id, "mat")
     setRecycleable(mat[0].recycleable)
-    setItem(prevItem => {
+    setItema(prevItem => {
       const updatedField = { material: mat[0].id }
       const editedItem = Object.assign({}, prevItem, updatedField)
       return editedItem
   })
   } else {
-    setItem(prevItem => {
+    setItema(prevItem => {
       const updatedField = { [event.target.name]: event.target.value }
       const editedItem = Object.assign({}, prevItem, updatedField)
       return editedItem
@@ -54,10 +54,14 @@ const handleFormChange = event => {
   }
 }
 
-  const deleteItem = (item) => {
-    console.log(item)
+  const deleteTheItem = (item) => {
     deleteItem(user, item.id)
-    .then(res => console.log(res))
+    .then(res => setItema({
+      name: '',
+      description: '',
+      barcode: '',
+      material: ''
+    }))
   }
 
   return (
@@ -76,7 +80,7 @@ const handleFormChange = event => {
             <p>Barcode: {item.barcode}</p>
         <Button
           type="submit"
-          onClick={() => deleteItem(item)}
+          onClick={() => deleteTheItem(item)}
         >
         Delete
     </Button>
