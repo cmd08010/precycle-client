@@ -24,13 +24,17 @@ class App extends Component {
     super(props)
     this.state = {
       user: null,
-      msgAlerts: []
+      msgAlerts: [],
+      barcode: ''
     }
   }
 
   setUser = user => this.setState({ user })
 
   clearUser = () => this.setState({ user: null })
+
+  setBarcode = (code) => {
+    this.setState({ barcode: code })}
 
   deleteAlert = (id) => {
     this.setState((state) => {
@@ -46,7 +50,7 @@ class App extends Component {
   }
 
   render () {
-    const { msgAlerts, user } = this.state
+    const { msgAlerts, user, barcode } = this.state
 
     return (
       <Fragment>
@@ -78,23 +82,23 @@ class App extends Component {
           <AuthenticatedRoute user={user} path='/change-password' render={() => (
             <ChangePassword msgAlert={this.msgAlert} user={user} />
           )} />
-          <AuthenticatedRoute user={user} path='/home' render={() => (
-            <Scanner msgAlert={this.msgAlert} user={user} />
+          <AuthenticatedRoute user={user} barcode={barcode} setBarcode={this.setBarcode} path='/home' render={() => (
+            <Scanner msgAlert={this.msgAlert} user={user} barcode={barcode} setBarcode={this.setBarcode} />
           )} />
-          <AuthenticatedRoute user={user} exact path='/' render={() => (
-            <Scanner msgAlert={this.msgAlert} user={user} />
+          <AuthenticatedRoute user={user} barcode={barcode} setBarcode={this.setBarcode} exact path='/' render={() => (
+            <Scanner msgAlert={this.msgAlert} user={user}  barcode={barcode} setBarcode={this.setBarcode}/>
           )} />
-          <AuthenticatedRoute user={user} exact path='/scan' render={() => (
-            <Scanner msgAlert={this.msgAlert} user={user} />
+          <AuthenticatedRoute user={user} barcode={barcode} setBarcode={this.setBarcode} exact path='/scan' render={() => (
+            <Scanner msgAlert={this.msgAlert} user={user} barcode={barcode} setBarcode={this.setBarcode} />
           )} />
-          <AuthenticatedRoute user={user} path='/barcode' render={() => (
-            <Barcode msgAlert={this.msgAlert} user={user} />
+          <AuthenticatedRoute user={user} barcode={barcode} setBarcode={this.setBarcode} path='/barcode' render={() => (
+            <Barcode msgAlert={this.msgAlert} user={user} barcode={barcode} setBarcode={this.setBarcode} />
           )} />
           <AuthenticatedRoute user={user} path='/get-scans' render={() => (
             <Scans msgAlert={this.msgAlert} user={user} />
           )} />
-          <AuthenticatedRoute user={user} path='/admin' render={() => (
-            <div>{user.is_superuser && <Admin msgAlert={this.msgAlert} user={user} />}</div>
+          <AuthenticatedRoute user={user} barcode={barcode} setBarcode={this.setBarcode} path='/admin' render={() => (
+            <div>{user.is_superuser && <Admin msgAlert={this.msgAlert} user={user} barcode={barcode} setBarcode={this.setBarcode}/>}</div>
           )} />
           </Switch>
         </main>

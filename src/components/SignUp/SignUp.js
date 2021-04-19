@@ -37,6 +37,7 @@ class SignUp extends Component {
       }))
       .then(() => history.push('/'))
       .catch(error => {
+        console.log(error, "my error")
         this.setState({ email: '', password: '', passwordConfirmation: '' })
         msgAlert({
           heading: 'Sign Up Failed with error: ' + error.message,
@@ -61,7 +62,8 @@ class SignUp extends Component {
                 type="email"
                 name="email"
                 value={email}
-                placeholder="Enter email"
+                placeholder="example@email.com"
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                 onChange={this.handleChange}
               />
             </Form.Group>
@@ -72,6 +74,7 @@ class SignUp extends Component {
                 name="password"
                 value={password}
                 type="password"
+                minLength="5"
                 placeholder="Password"
                 onChange={this.handleChange}
               />

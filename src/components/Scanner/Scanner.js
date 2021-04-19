@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 import { scanItem, addScan, scanItemWithApi } from '../../api/scan'
 import BootstrapSwitchButton from 'bootstrap-switch-button-react'
 
@@ -9,9 +9,9 @@ import Spinner from 'react-bootstrap/Spinner'
 import Barcode from './Barcode'
 
 
-const Scanner = ({ user, msgAlert }) => {
+const Scanner = ({ user, msgAlert, barcode, setBarcode }) => {
   const [response, setResponse] = useState(undefined)
-  const [barcode, setBarcode] = useState('Not Found')
+  // const [barcode, setBarcode] = useState('Not Found')
   const [api, setApi] = useState(false)
   const [msg, setMsg] = useState('')
   const [formData, setFormData] = useState({
@@ -75,7 +75,7 @@ const Scanner = ({ user, msgAlert }) => {
       .catch(err => {
         console.log(err, "err")
         setLoading(false)
-        setMsg('Item Not found! -Add the item')
+        setMsg('Item Not found!')
       })
     }
   }
@@ -207,6 +207,13 @@ const Scanner = ({ user, msgAlert }) => {
         </div>
       )
     })}
+    {msg === "Item Not found!" && <div> {user.is_superuser &&
+      <Link to='/admin/add-item-from-scan'
+        className="btn btn-outline-light btn-lg"
+        role="button">
+        Add the item!
+        </Link>}
+        </div>}
     {msg && <div className="header-4">{msg}</div>}
     </div>
     </div>

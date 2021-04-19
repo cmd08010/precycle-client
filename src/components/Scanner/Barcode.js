@@ -14,7 +14,6 @@ function Barcode({ user, msgAlert, barcode, setBarcode, formData, setFormData}) 
     console.log(barcode)
     setChecked(true)
     setTimeout(() => {
-
       setChecked(false)
       if(barcode === 'Not Found') {
         setMsg("Please try again")
@@ -55,7 +54,7 @@ function Barcode({ user, msgAlert, barcode, setBarcode, formData, setFormData}) 
       />
       </div>
     }
-    { barcode !== 'Not Found' && <p className="barcode-scan"> Barcode: {barcode}</p>}
+    { barcode !== '' && <p className="barcode-scan"> Barcode: {formData.barcode}</p>}
     </div>
   )
 }

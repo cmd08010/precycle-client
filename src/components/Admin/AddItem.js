@@ -11,30 +11,40 @@ import Spinner from 'react-bootstrap/Spinner'
 import { Col } from 'react-bootstrap'
 import Barcode from '../Scanner/Barcode'
 
-const AddItem = ({ user, msgAlert }) => {
+const AddItem = ({ user, msgAlert, barcode, setBarcode, props, location }) => {
+
   const [item, setItem] = useState({
     name: '',
     description: '',
-    barcode: '',
+    barcode: barcode,
     material: ''
   })
   const [materials, setMaterials] = useState([])
   const [recycleable, setRecycleable] = useState(false)
 
   useEffect(() => {
+    console.log(location.pathname, "my lcation")
+    if (location.pathname !== "/admin/add-item-from-scan"){
+      setBarcode('')
+      setItem({
+        name: '',
+        description: '',
+        barcode: '',
+        material: ''
+      })
+    }
     getMaterials(user)
     .then(res => {
       console.dir(res.data.materials)
       setMaterials(res.data.materials)
     })
-  },[])
+  },[location.pathname])
 
 
   const handleFormChange = event => {
     event.persist()
     if (event.target.name === "material") {
       const mat = materials.filter(material => material.name === event.target.value)
-      console.log(mat[0].id, "mat")
       setRecycleable(mat[0].recycleable)
       setItem(prevItem => {
         const updatedField = { material: mat[0].id }
@@ -74,7 +84,7 @@ const AddItem = ({ user, msgAlert }) => {
     <div className="row">
       <div className="col-sm-10 col-md-8 mx-auto mt-5">
       <div className="bubble">
-        <div className="header-2">Check your product!</div>
+        <div className="header-2">Add new Item!</div>
         </div>
         <Form onSubmit={addNewItem}>
         <Form.Group controlId="name">

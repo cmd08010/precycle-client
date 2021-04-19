@@ -17,7 +17,7 @@ import { getMaterials } from '../../api/material'
 import Button from 'react-bootstrap/Button'
 import Image from 'react-bootstrap/Image'
 
-const Admin = ({ user, msgAlert }) => {
+const Admin = ({ user, msgAlert, barcode, setBarcode }) => {
   const [rerender, setRerender] = useState('')
   const [item, setItem] = useState({
     name: '',
@@ -52,9 +52,12 @@ useEffect(() => {
           <Link to="/admin/add-material" className="links">Add Material</Link>
           <Link to="/admin/materials" className="links">Get Materials</Link>
           </div>
-          <AuthenticatedRoute user={user} path='/admin/add-item' render={() => (
-             <div>{user.is_superuser && <AddItem msgAlert={msgAlert} user={user} />}</div>
+          <AuthenticatedRoute user={user} barcode={barcode} setBarcode={setBarcode} path='/admin/add-item' render={() => (
+             <div>{user.is_superuser && <AddItem msgAlert={msgAlert} user={user} barcode={barcode} setBarcode={setBarcode} />}</div>
            )} />
+           <AuthenticatedRoute user={user} barcode={barcode} setBarcode={setBarcode} path='/admin/add-item-from-scan' render={() => (
+              <div>{user.is_superuser && <AddItem msgAlert={msgAlert} user={user} barcode={barcode} setBarcode={setBarcode} />}</div>
+            )} />
            <AuthenticatedRoute user={user} path='/admin/update-item/:id' render={() => (
               <div>{user.is_superuser && <UpdateItem msgAlert={msgAlert} user={user} materials={materials} />}</div>
             )} />
