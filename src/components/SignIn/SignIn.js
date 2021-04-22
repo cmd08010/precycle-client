@@ -95,7 +95,7 @@ class SignIn extends Component {
           </div><p >
             <strong> Username:</strong> test@admin.com
           <br></br>
-            <strong>Password:</strong> testadmin
+            <strong>Password:</strong> admin
           </p>
           {this.state.loading &&
             <Spinner animation="border" role="status" >
