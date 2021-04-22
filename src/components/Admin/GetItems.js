@@ -38,6 +38,7 @@ const GetItems = ({ user, msgAlert }) => {
         })
 
     } else {
+      setTestItems(false)
       getItems(user)
         .then(res => setItems(res.data.items))
         .then(() => {
@@ -83,7 +84,6 @@ const GetItems = ({ user, msgAlert }) => {
               {testItems.map(testItem => {
                 return (
                   <div key={testItem.id} className={testItem.recycleable ? "recycleable" : "not-rec"}>
-
                     <div className="header-4">{testItem.name}</div>
                     <p>Owner: {testItem.owner}</p>
                     <p>Recyclable?: {testItem.recycleable ? "yes" : "no"}</p>
@@ -115,6 +115,15 @@ const GetItems = ({ user, msgAlert }) => {
                   <div key={item.id} className={item.recycleable ? "recycleable" : "not-rec"}>
                     <div className="header-4">{item.name}</div>
                     <p>Owner: {item.owner}</p>
+                    <p>Recyclable?: {item.recycleable ? "yes" : "no"}</p>
+                    <p>Description: {item.description}</p>
+                    <p>Barcode: {item.barcode}</p>
+                  </div>
+                )
+              } else if (!user.is_superuser) {
+                return (
+                  <div key={item.id} className={item.recycleable ? "recycleable" : "not-rec"}>
+                    <div className="header-4">{item.name}</div>
                     <p>Recyclable?: {item.recycleable ? "yes" : "no"}</p>
                     <p>Description: {item.description}</p>
                     <p>Barcode: {item.barcode}</p>
