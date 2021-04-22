@@ -49,8 +49,9 @@ body {
   padding: 20px;
   margin: 30px;
   text-align: center;
-  white-space: nowrap;
+  line-height: normal;
   color: $quinary;
+  overflow-wrap: break-word;
 }
 
 .header-4 {
@@ -60,8 +61,9 @@ body {
   font-size: 2rem;
   margin: 30px;
   text-align: center;
-  white-space: nowrap;
+  line-height: normal;
   color: $quinary;
+  overflow-wrap: break-word;
 }
 
 .header-5 {
@@ -72,6 +74,8 @@ body {
   margin: 30px;
   text-align: center;
   color: $quinary;
+  line-height: normal;
+  overflow-wrap: break-word;
 }
 
 Nav {
@@ -97,6 +101,7 @@ h3 {
 p {
   font-size: 1rem;
   font-family: 'Potta One', cursive;
+  text-align: center;
 }
 
 span {

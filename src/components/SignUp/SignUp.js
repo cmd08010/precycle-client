@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button'
 import Spinner from 'react-bootstrap/Spinner'
 
 class SignUp extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.state = {
@@ -53,7 +53,7 @@ class SignUp extends Component {
       })
   }
 
-  render () {
+  render() {
     const { email, password, passwordConfirmation } = this.state
 
     return (
@@ -103,7 +103,10 @@ class SignUp extends Component {
               Submit
             </Button>
           </Form>
-          {this.state.loading && <Spinner animation="border"/>}
+          {this.state.loading &&
+            <Spinner animation="border" role="status" >
+              <span className="sr-only">Loading...</span>
+            </Spinner>}
         </div>
       </div>
     )

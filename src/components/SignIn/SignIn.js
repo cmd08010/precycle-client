@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button'
 import Spinner from 'react-bootstrap/Spinner'
 
 class SignIn extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.state = {
@@ -27,7 +27,6 @@ class SignIn extends Component {
     event.preventDefault()
 
     const { msgAlert, history, setUser } = this.props
-
     signIn(this.state)
       .then(res => {
         this.setState({ loading: true })
@@ -37,10 +36,11 @@ class SignIn extends Component {
       .then(() => {
         this.setState({ loading: false })
         msgAlert({
-        heading: 'Sign In Success',
-        message: messages.signInSuccess,
-        variant: 'success'
-      })})
+          heading: 'Sign In Success',
+          message: messages.signInSuccess,
+          variant: 'success'
+        })
+      })
       .then(() => history.push('/'))
       .catch(error => {
         this.setState({ email: '', password: '' })
@@ -52,7 +52,7 @@ class SignIn extends Component {
       })
   }
 
-  render () {
+  render() {
     const { email, password } = this.state
 
     return (
@@ -89,9 +89,20 @@ class SignIn extends Component {
               Sign In
             </Button>
           </Form>
-          {this.state.loading && <Spinner animation="border"/>}
-        </div>
-      </div>
+          <hr />
+          <div className="header-5">Test out our admin features!
+          <br />
+          </div><p >
+            <strong> Username:</strong> test@admin.com
+          <br></br>
+            <strong>Password:</strong> testadmin
+          </p>
+          {this.state.loading &&
+            <Spinner animation="border" role="status" >
+              <span className="sr-only">Loading...</span>
+            </Spinner>}
+        </div >
+      </ div>
     )
   }
 }

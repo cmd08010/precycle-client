@@ -184,7 +184,7 @@ const Scanner = ({ user, msgAlert, barcode, setBarcode }) => {
       </Button>}
       </Form>
       </div>
-      {user.is_superuser && <div className="admin-api">Use Api <BootstrapSwitchButton
+      {user.email === 'colleen@admin.com' && <div className="admin-api">Use Api <BootstrapSwitchButton
       checked={api}
       onlabel='YES'
       offlabel='NO'
